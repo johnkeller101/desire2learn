@@ -7,13 +7,32 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var debugActivity: UIActivityIndicatorView!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var progress: UILabel!
+
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.debugActivity.isHidden = true
+        self.debugActivity.hidesWhenStopped = true
+        self.password.isSecureTextEntry = true
+        
+        self.username.text = "joke1008"
+        self.username.keyboardAppearance = .dark
+        self.password.text = "s#N!PgZpSPw3H&mnewTH"
+        self.password.keyboardAppearance = .dark
         // Do any additional setup after loading the view, typically from a nib.
-        self.sendRequestRequest()
+       // self.sendRequestRequest()
+        if(((self.username.text?.characters.count)!>3) && ((self.password.text?.characters.count)!>3)){
+            self.login(self)
+        }
         
     }
 
@@ -22,90 +41,95 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func sendRequestRequest() {
-        let login = ["Login":"Login", "password":"s%23N!PgZpSPw3H%26mnewTH", "userName":"joke1008"]
+    
+    @IBAction func login(_ sender: AnyObject) {
+        self.debugActivity.isHidden = false
+        self.loginButton.isHidden = true
         
-        let url = NSURL(string: "https://learn.colorado.edu/d2l/lp/auth/login/login.d2l")!
+        self.progress.isHidden = false
+        self.progress.text = "Logging in as \(self.username.text!)..."
+        self.username.isEnabled = false
+        self.password.isEnabled = false
         
-        let session = URLSession.shared
-        
-        let request = NSMutableURLRequest(url: url as URL)
-        
-        do {
-            // JSON all the things
-            let auth = "userName=joke1008&Login=Login&password=s%23N%21PgZpSPw3H%26mnewTH"
-            
-            // Set the request content type to JSON
-            request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-            request.addValue("iOS", forHTTPHeaderField: "User-Agent")
-            request.addValue("gzip, deflate, sdch, br", forHTTPHeaderField: "Accept-Encoding")
-            request.addValue("1", forHTTPHeaderField: "Upgrade-Insecure-Requests")
-            
-            // The magic...set the HTTP request method to POST
-            request.httpMethod = "POST"
-            
-            // Add the JSON serialized login data to the body
-            request.httpBody = auth.data(using: String.Encoding.utf8)
-            
-            print(request.allHTTPHeaderFields)
-            
-            
-            // Create the task that will send our login request (asynchronously)
-            let task = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-                // Do something with the HTTP response
-                print("Got response \(response) with error \(error)")
-                let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print(strData)
-            })
-            
-            // Start the task on a background thread
-            task.resume()
-            
-            
-            
-            let request2 = NSMutableURLRequest(url: NSURL(string: "https://learn.colorado.edu/d2l/lp/auth/login/ProcessLoginActions.d2l") as! URL)
-            let task2 = session.dataTask(with: request2 as URLRequest, completionHandler: { (data, response, error) -> Void in
-                // Do something with the HTTP response
-                print("Got response \(response) with error \(error)")
-                let strData = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                print(strData)
-            })
-            task2.resume()
-            
-        } catch {
-            // Handle your errors folks...
-            print("Error")
-        }
+        self.sendRequestRequest()
     }
     
-    func data_request()
-    {
-        let url:URL = URL(string: "")!
-        let session = URLSession.shared
+    func resetView() {
+        self.debugActivity.isHidden = true
+        self.loginButton.isHidden = false
         
-        let request = NSMutableURLRequest(url: url)
-        request.httpMethod = "POST"
-        request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+        self.progress.isHidden = false
+        self.username.isEnabled = true
+        self.password.isEnabled = true
+        self.view.backgroundColor = UIColor.white
+    }
+    
+    func sendRequestRequest() {
+        guard let uname = self.username.text else {
+            print("ooops")
+            return
+        }
+        guard let pword = self.password.text else {
+            print("ooops")
+            return
+        }
         
-        let paramString = "data=Hello"
-        request.httpBody = paramString.data(using: String.Encoding.utf8)
+        let loginRequest : Dictionary = [
+            "Login":"Login",
+            "password" : pword,
+            "userName" : uname
+        ]
         
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {
-            (
-            data, response, error) in
-            
-            guard let _:Data = data, let _:URLResponse = response  , error == nil else {
-                print("error")
+        
+        
+        let serverUrl = "https://learn.colorado.edu/d2l/lp/auth/login/login.d2l"
+        self.debugActivity.startAnimating()
+        // Both calls are equivalent
+        Alamofire.request(serverUrl, method: .post, parameters: loginRequest).responseData { response in
+            print(loginRequest)
+            debugPrint(response)
+            let res_url:String = (response.response!.url?.absoluteString)!
+            if(res_url.range(of: "BAD_CREDENTIALS") != nil) {
+                print("Error logging in...")
+                self.progress.text = "Error: Invalid credentials"
+                self.debugActivity.stopAnimating()
+                self.resetView()
                 return
             }
+            self.progress.text = "Processing login..."
+            Alamofire.request("https://learn.colorado.edu/d2l/lp/auth/login/ProcessLoginActions.d2l").responseData { response in
+                print("Processing login...")
+                debugPrint(response)
+                self.progress.text = "Loading profile information..."
+                Alamofire.request("https://learn.colorado.edu/d2l/api/lp/1.4/users/whoami").responseJSON { response in
+                    //debugPrint(response)
+                    if let res = response.result.value as? [String: AnyObject] {
+                        print(res)
+                        self.progress.text = "Loaded \(res["FirstName"]!) \(res["LastName"]!)"
+                    }
+                    self.debugActivity.stopAnimating()
+                    
+                }
+            }
             
-            let dataString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print(dataString)
-            
-        })
+        }
         
-        task.resume()
+        //HTTPCookieStorage.shared.setCookie(getCookie())
         
+        
+
+    }
+    
+    func setCookie (cookie:HTTPCookie)
+    {
+        UserDefaults.standard.set(cookie.properties, forKey: "kCookie")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getCookie () -> HTTPCookie
+    {
+        let cookie = HTTPCookie(properties: UserDefaults.standard.object(forKey: "kCookie") as! [HTTPCookiePropertyKey : Any])
+        return cookie!
     }
 }
 
