@@ -13,10 +13,13 @@ class ClassTableViewController: UITableViewController {
     
     var class_id: NSNumber = 0
     var class_name: String = ""
+    var user_id: String = ""
     var user_role: String = ""
     var news_items: Array = [Any]()
     
     var class_content: Array = [Any]()
+    
+    var grades: Array = [Any]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +29,8 @@ class ClassTableViewController: UITableViewController {
         retrieveNews()
         
         retrieveClassContent()
+        
+        retrieveGrades()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,7 +42,7 @@ class ClassTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,6 +54,8 @@ class ClassTableViewController: UITableViewController {
             } else {
                 return self.news_items.count
             }
+        } else if(section == 1) {
+            return grades.count
         } else {
             return self.class_content.count
         }
@@ -60,18 +67,95 @@ class ClassTableViewController: UITableViewController {
         if(indexPath.section == 0){
             let sub = news_items[indexPath.row] as! NSArray
             let name2 = sub[0] as! String
+            let date = sub[2] as! String
+            let attachments = sub[3] as! NSArray
+            
+            let formatter = DateFormatter()
+            formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            let date2 = formatter.date(from: date)
+            formatter.dateFormat = "M/d"
+            let st = formatter.string(from: date2!)
+
             cell.textLabel?.text = name2
+            if attachments.count != 0 {
+                cell.detailTextLabel?.text = "📎 "+st
+            } else {
+                cell.detailTextLabel?.text = st
+            }
+            
+        } else if(indexPath.section == 1){
+            let sub = grades[indexPath.row] as! NSArray
+            let name2 = sub[0] as! String
+            let weight = sub[8] as! NSArray
+            cell.textLabel?.text = name2
+            cell.detailTextLabel?.text = "\(weight.count)"
         } else {
             let sub = class_content[indexPath.row] as! NSArray
             let name2 = sub[0] as! String
-            cell.textLabel?.text = name2
+            let count = sub[2] as! NSArray
+            cell.textLabel?.text = "📁 "+name2
+            cell.detailTextLabel?.text = ""
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row+1)!")
+        if indexPath.section == 0 {
+            
+            let vc = NewDetailViewController()
+            let sub = news_items[indexPath.row] as! NSArray
+            let code = sub[1] as! JSON
+            print(sub)
+            vc.html = code.stringValue
+            vc.newstitle = sub[0] as! String
+            vc.class_id = String(describing: self.class_id)
+            vc.article_id = sub[4] as! String
+            print(sub[3] as! NSArray)
+            vc.attachments.append(contentsOf: sub[3] as! NSArray)
+            
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            let date2 = formatter.date(from: sub[2] as! String)
+            formatter.dateStyle = .long
+            formatter.timeStyle = .short
+            let st = formatter.string(from: date2!)
+            vc.details.append("🗓 Published on "+st)
+            
+            vc.details.append("🔗 "+"https://learn.colorado.edu/d2l/lms/news/main.d2l?ou=\(class_id)")
+            self.navigationController?.pushViewController(vc, animated: true)
+            //self.present(vc, animated: true, completion: nil)
+        } else if(indexPath.section == 1) {
+            print("Selected Grade Object")
+            let vc = GradeViewController()
+            let sub = grades[indexPath.row] as! NSArray
+            print(sub)
+            
+            vc.name = sub[0] as! String
+            let fi = sub[sub.count-1] as! NSArray
+            vc.grades.append(contentsOf: fi)
+            vc.class_id = String(describing: self.class_id)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("Selected Grade Object")
+            let vc = FileBrowserViewController()
+            let sub = class_content[indexPath.row] as! NSArray
+            vc.name = sub[0] as! String
+            let fi = sub[2] as! NSArray
+            vc.files.append(contentsOf: fi)
+            vc.class_id = String(describing: self.class_id)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 0){
             return "news"
+        } else if(section == 1){
+            return "grades"
         } else {
             return "files"
         }
@@ -113,24 +197,6 @@ class ClassTableViewController: UITableViewController {
     */
 
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? NewDetailViewController {
-            //let selected = tableView.indexPathForSelectedRow?.row
-            if(tableView.indexPathForSelectedRow?.section == 0) {
-                let sub = news_items[(tableView.indexPathForSelectedRow?.row)!] as! NSArray
-                print(sub)
-                let name = sub[1] as! JSON
-                //print()
-                vc.html = name.stringValue
-                //vc.webView.loadHTMLString(name.stringValue, baseURL: nil)
-            }
-        }
-    }
-    
-    
     func retrieveNews(){
         print("Requesting news...")
         Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/news/").responseJSON { response in
@@ -139,9 +205,17 @@ class ClassTableViewController: UITableViewController {
             case .success(let data):
                 let json = JSON(data)
                 for (subJson) in json.arrayValue {
-                    print()
-                    let element:Array = [subJson["Title"].stringValue,subJson["Body"]["Html"],subJson["StartDate"].stringValue,subJson["Attachments"].stringValue] as Array
-                    print("adding",subJson["Title"].stringValue)
+                    var element:Array = [subJson["Title"].stringValue,subJson["Body"]["Html"],subJson["StartDate"].stringValue] as Array
+                    var attachments = [Any]()
+                    for item in subJson["Attachments"].arrayValue {
+                        var att = [Any]()
+                        att.append(item["FileName"].stringValue)
+                        att.append(item["Size"].stringValue)
+                        att.append(item["FileId"].stringValue)
+                        attachments.append(att)
+                    }
+                    element.append(attachments)
+                    element.append(subJson["Id"].stringValue)
                     self.news_items.append(element)
                 }
                 self.tableView.reloadData()
@@ -151,6 +225,68 @@ class ClassTableViewController: UITableViewController {
             //self.debugActivity.stopAnimating()
             
         }
+    }
+    
+    func retrieveGrades(){
+        print("Requesting grades...")
+        Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/grades/categories/").responseJSON { response in
+            //debugPrint(response)
+            switch response.result {
+            case .success(let data):
+                let json = JSON(data)
+                for (subJson) in json.arrayValue {
+                    //print(subJson)
+                    var sub_arr = [Any]()
+                    sub_arr.append(subJson["Name"].stringValue)
+                    sub_arr.append(subJson["MaxPoints"].stringValue)
+                    sub_arr.append(subJson["Id"].stringValue)
+                    sub_arr.append(subJson["NumberOfLowestToDrop"].intValue)
+                    sub_arr.append(subJson["NumberOfHighestToDrop"].intValue)
+                    sub_arr.append(subJson["Weight"].stringValue)
+                    sub_arr.append(subJson["MaxPoints"].stringValue)
+                    sub_arr.append(subJson["WeightDistributionType"].stringValue)
+                    var sub_grades = [Any]()
+                    for (subsub) in subJson["Grades"].arrayValue {
+                        //print(subsub)
+                        var sub_sub = [Any]()
+                        sub_sub.append(subsub["Name"].stringValue)
+                        sub_sub.append(subsub["Id"].stringValue)
+                        sub_sub.append(subsub["MaxPoints"].stringValue)
+                        sub_sub.append(subsub["Weight"].stringValue)
+                        sub_grades.append(sub_sub)
+                    }
+                    sub_arr.append(sub_grades)
+                    self.grades.append(sub_arr as Array)
+                }
+                self.tableView.reloadData()
+            case .failure(let error):
+                print("Request failed with error: \(error)")
+            }
+            //self.debugActivity.stopAnimating()
+            
+        }
+//        Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/grades/").responseJSON { response in
+//            //debugPrint(response)
+//            switch response.result {
+//            case .success(let data):
+//                let json = JSON(data)
+//                for (subJson) in json.arrayValue {
+//                    //print(subJson)
+//                    var sub_arr = [Any]()
+//                    sub_arr.append(subJson["Name"].stringValue)
+//                    sub_arr.append(subJson["Id"].stringValue)
+//                    sub_arr.append(subJson["CategoryId"].stringValue)
+//                    sub_arr.append(subJson["GradeSchemeUrl"].stringValue)
+//                    sub_arr.append(subJson["MaxPoints"].stringValue)
+//                    sub_arr.append(subJson["Weight"].stringValue)
+//                    self.grades.append(sub_arr as Array)
+//                }
+//            case .failure(let error):
+//                print("Request failed with error: \(error)")
+//            }
+//            //self.debugActivity.stopAnimating()
+//            
+//        }
     }
     
     func retrieveClassContent(){

@@ -19,6 +19,10 @@
 		465D7CBA1DA7169800DD874C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CB91DA7169800DD874C /* SwiftyJSON.swift */; };
 		465D7CBC1DA739E000DD874C /* ClassTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CBB1DA739E000DD874C /* ClassTableViewController.swift */; };
 		465D7CBE1DA74F0600DD874C /* NewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CBD1DA74F0600DD874C /* NewDetailViewController.swift */; };
+		465D7CC11DA86A8D00DD874C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CC01DA86A8D00DD874C /* Helper.swift */; };
+		465D7CC41DA8A8AA00DD874C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465D7CC31DA8A8AA00DD874C /* SafariServices.framework */; };
+		465D7CC61DA8AF9D00DD874C /* FileBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */; };
+		466238971DA8C0DE004D552B /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466238961DA8C0DE004D552B /* GradeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +112,10 @@
 		465D7CB91DA7169800DD874C /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		465D7CBB1DA739E000DD874C /* ClassTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassTableViewController.swift; sourceTree = "<group>"; };
 		465D7CBD1DA74F0600DD874C /* NewDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDetailViewController.swift; sourceTree = "<group>"; };
+		465D7CC01DA86A8D00DD874C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		465D7CC31DA8A8AA00DD874C /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileBrowserViewController.swift; sourceTree = "<group>"; };
+		466238961DA8C0DE004D552B /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				465D7CC41DA8A8AA00DD874C /* SafariServices.framework in Frameworks */,
 				465D7CB01DA6ED2600DD874C /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +136,7 @@
 			children = (
 				465D7C841DA6D97000DD874C /* desire2learn */,
 				465D7C831DA6D97000DD874C /* Products */,
+				465D7CC21DA8A8AA00DD874C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,9 +154,12 @@
 				465D7C971DA6EC9500DD874C /* Alamofire.xcodeproj */,
 				465D7C851DA6D97000DD874C /* AppDelegate.swift */,
 				465D7C871DA6D97000DD874C /* ViewController.swift */,
+				465D7CC01DA86A8D00DD874C /* Helper.swift */,
 				465D7CB71DA702D700DD874C /* EnrollmentsTableViewController.swift */,
 				465D7CBB1DA739E000DD874C /* ClassTableViewController.swift */,
 				465D7CBD1DA74F0600DD874C /* NewDetailViewController.swift */,
+				465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */,
+				466238961DA8C0DE004D552B /* GradeViewController.swift */,
 				465D7C891DA6D97000DD874C /* Main.storyboard */,
 				465D7C8C1DA6D97000DD874C /* Assets.xcassets */,
 				465D7C8E1DA6D97000DD874C /* LaunchScreen.storyboard */,
@@ -169,6 +182,14 @@
 				465D7CAF1DA6EC9500DD874C /* Alamofire.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		465D7CC21DA8A8AA00DD874C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				465D7CC31DA8A8AA00DD874C /* SafariServices.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,9 +327,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				465D7CBC1DA739E000DD874C /* ClassTableViewController.swift in Sources */,
+				466238971DA8C0DE004D552B /* GradeViewController.swift in Sources */,
+				465D7CC11DA86A8D00DD874C /* Helper.swift in Sources */,
 				465D7C881DA6D97000DD874C /* ViewController.swift in Sources */,
 				465D7CB81DA702D700DD874C /* EnrollmentsTableViewController.swift in Sources */,
 				465D7C861DA6D97000DD874C /* AppDelegate.swift in Sources */,
+				465D7CC61DA8AF9D00DD874C /* FileBrowserViewController.swift in Sources */,
 				465D7CBE1DA74F0600DD874C /* NewDetailViewController.swift in Sources */,
 				465D7CBA1DA7169800DD874C /* SwiftyJSON.swift in Sources */,
 			);
@@ -486,6 +510,7 @@
 				465D7C961DA6D97000DD874C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

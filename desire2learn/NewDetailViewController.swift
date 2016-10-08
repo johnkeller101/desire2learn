@@ -7,15 +7,33 @@
 //
 
 import UIKit
+import SafariServices
 
-class NewDetailViewController: UIViewController {
+class NewDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var webView: UIWebView!
+    var tableView: UITableView = UITableView()
+    
     var html:String = ""
+    var newstitle:String = ""
+    var class_id:String = ""
+    var article_id:String = ""
+    var attachments: Array = [Any]()
+    var details: Array = [Any]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(html)
-        self.webView.loadHTMLString(html, baseURL: (URL (string: "https://learn.colorado.edu/d2l/le/")))
+        print(article_id)
+        
+        
+        tableView = UITableView(frame: CGRect.zero, style: UITableViewStyle.grouped)
+        tableView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height);
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        self.title = self.newstitle
         // Do any additional setup after loading the view.
     }
 
@@ -24,7 +42,89 @@ class NewDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        
+        if indexPath.section == 0 {
+            cell.textLabel?.text = "Post Content"
+        } else if indexPath.section == 1{
+            let t = attachments[indexPath.row] as! NSArray
+            let ti = t[0] as? String
+            let size_str = t[1] as! NSString
+            var size = Double(size_str as String)
+            size = (size! / 1000)
+            var ex:String = ""
+            switch size {
+            case _ where size! < Double(500):
+                ex = "kB"
+                size = Double(round(10*size!)/10)
+            case _ where size! > Double(500):
+                
+                size = size! / 1000
+                ex = "MB"
+                size = Double(round(100*size!)/100)
+            default:
+                ex = "kB"
+            }
+            
+            cell.textLabel?.text = "📄 "+ti!
+            cell.detailTextLabel?.text = String(describing: size!)+" "+ex
+        } else {
+            cell.textLabel?.text = details[indexPath.row] as! String
+        }
+        
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return attachments.count
+        } else {
+            return details.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "content"
+        } else if section == 1 {
+            if attachments.count > 0 {
+                return "attachments"
+            } else {
+                return nil
+            }
+        } else {
+            return "details"
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected \(indexPath.row)!)")
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0{
+            
+        } else if indexPath.section == 1{
+            let t = attachments[indexPath.row] as! NSArray
+            let file_id = t[2] as! String
+            // https://learn.colorado.edu/d2l/le/news/widget/172556/FileProvider?newsId=222447&fileId=3252523
+            let safariVC = SFSafariViewController(url: URL(string: "https://learn.colorado.edu/d2l/le/news/widget/\(self.class_id)/FileProvider?newsId=\(article_id)&fileId=\(file_id)")!)
+            safariVC.title = t[0] as? String
+            self.navigationController?.pushViewController(safariVC, animated: true)
+        } else {
+            
+        }
+    }
     /*
     // MARK: - Navigation
 
