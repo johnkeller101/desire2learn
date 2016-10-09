@@ -23,6 +23,13 @@
 		465D7CC41DA8A8AA00DD874C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465D7CC31DA8A8AA00DD874C /* SafariServices.framework */; };
 		465D7CC61DA8AF9D00DD874C /* FileBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */; };
 		466238971DA8C0DE004D552B /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466238961DA8C0DE004D552B /* GradeViewController.swift */; };
+		466D228A1DA956B80034759C /* FileAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22891DA956B80034759C /* FileAttachmentViewController.swift */; };
+		466D22931DA957A80034759C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466D22921DA957A80034759C /* WebKit.framework */; };
+		466D22FE1DAAC45A0034759C /* MarkupElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22F91DAAC45A0034759C /* MarkupElement.swift */; };
+		466D22FF1DAAC45A0034759C /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22FA1DAAC45A0034759C /* Modifier.swift */; };
+		466D23001DAAC45A0034759C /* Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22FB1DAAC45A0034759C /* Parse.swift */; };
+		466D23011DAAC45A0034759C /* SmallCaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22FC1DAAC45A0034759C /* SmallCaps.swift */; };
+		466D23021DAAC45A0034759C /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22FD1DAAC45A0034759C /* UIFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +123,14 @@
 		465D7CC31DA8A8AA00DD874C /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileBrowserViewController.swift; sourceTree = "<group>"; };
 		466238961DA8C0DE004D552B /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
+		466D22891DA956B80034759C /* FileAttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAttachmentViewController.swift; sourceTree = "<group>"; };
+		466D22921DA957A80034759C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		466D22941DAAC2250034759C /* desire2learn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "desire2learn-Bridging-Header.h"; sourceTree = "<group>"; };
+		466D22F91DAAC45A0034759C /* MarkupElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkupElement.swift; sourceTree = "<group>"; };
+		466D22FA1DAAC45A0034759C /* Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
+		466D22FB1DAAC45A0034759C /* Parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parse.swift; sourceTree = "<group>"; };
+		466D22FC1DAAC45A0034759C /* SmallCaps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallCaps.swift; sourceTree = "<group>"; };
+		466D22FD1DAAC45A0034759C /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466D22931DA957A80034759C /* WebKit.framework in Frameworks */,
 				465D7CC41DA8A8AA00DD874C /* SafariServices.framework in Frameworks */,
 				465D7CB01DA6ED2600DD874C /* Alamofire.framework in Frameworks */,
 			);
@@ -160,12 +176,19 @@
 				465D7CBD1DA74F0600DD874C /* NewDetailViewController.swift */,
 				465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */,
 				466238961DA8C0DE004D552B /* GradeViewController.swift */,
+				466D22891DA956B80034759C /* FileAttachmentViewController.swift */,
 				465D7C891DA6D97000DD874C /* Main.storyboard */,
 				465D7C8C1DA6D97000DD874C /* Assets.xcassets */,
 				465D7C8E1DA6D97000DD874C /* LaunchScreen.storyboard */,
 				465D7CB91DA7169800DD874C /* SwiftyJSON.swift */,
 				465D7C911DA6D97000DD874C /* Info.plist */,
 				465D7CB51DA6F7D300DD874C /* culogo.jpg */,
+				466D22941DAAC2250034759C /* desire2learn-Bridging-Header.h */,
+				466D22F91DAAC45A0034759C /* MarkupElement.swift */,
+				466D22FA1DAAC45A0034759C /* Modifier.swift */,
+				466D22FB1DAAC45A0034759C /* Parse.swift */,
+				466D22FC1DAAC45A0034759C /* SmallCaps.swift */,
+				466D22FD1DAAC45A0034759C /* UIFont.swift */,
 			);
 			path = desire2learn;
 			sourceTree = "<group>";
@@ -187,6 +210,7 @@
 		465D7CC21DA8A8AA00DD874C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				466D22921DA957A80034759C /* WebKit.framework */,
 				465D7CC31DA8A8AA00DD874C /* SafariServices.framework */,
 			);
 			name = Frameworks;
@@ -227,6 +251,7 @@
 					465D7C811DA6D97000DD874C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = LU2S86842K;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -326,13 +351,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466D23011DAAC45A0034759C /* SmallCaps.swift in Sources */,
 				465D7CBC1DA739E000DD874C /* ClassTableViewController.swift in Sources */,
 				466238971DA8C0DE004D552B /* GradeViewController.swift in Sources */,
 				465D7CC11DA86A8D00DD874C /* Helper.swift in Sources */,
 				465D7C881DA6D97000DD874C /* ViewController.swift in Sources */,
+				466D22FE1DAAC45A0034759C /* MarkupElement.swift in Sources */,
 				465D7CB81DA702D700DD874C /* EnrollmentsTableViewController.swift in Sources */,
+				466D228A1DA956B80034759C /* FileAttachmentViewController.swift in Sources */,
+				466D23021DAAC45A0034759C /* UIFont.swift in Sources */,
 				465D7C861DA6D97000DD874C /* AppDelegate.swift in Sources */,
+				466D22FF1DAAC45A0034759C /* Modifier.swift in Sources */,
 				465D7CC61DA8AF9D00DD874C /* FileBrowserViewController.swift in Sources */,
+				466D23001DAAC45A0034759C /* Parse.swift in Sources */,
 				465D7CBE1DA74F0600DD874C /* NewDetailViewController.swift in Sources */,
 				465D7CBA1DA7169800DD874C /* SwiftyJSON.swift in Sources */,
 			);
@@ -466,12 +497,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = LU2S86842K;
 				INFOPLIST_FILE = desire2learn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnkeller.desire2learn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "desire2learn/desire2learn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -481,12 +515,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = LU2S86842K;
 				INFOPLIST_FILE = desire2learn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnkeller.desire2learn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "desire2learn/desire2learn-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -21,6 +21,9 @@ class ClassTableViewController: UITableViewController {
     
     var grades: Array = [Any]()
     
+    var categories = [String:Any]()
+    var gradeobjects = [String:Any]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = class_name
@@ -31,6 +34,8 @@ class ClassTableViewController: UITableViewController {
         retrieveClassContent()
         
         retrieveGrades()
+        
+        betterGrades()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +60,12 @@ class ClassTableViewController: UITableViewController {
                 return self.news_items.count
             }
         } else if(section == 1) {
-            return grades.count
+            if (grades.count > 0) && (categories.count > 0) {
+                return categories.count
+            } else {
+                return 0
+            }
+            
         } else {
             return self.class_content.count
         }
@@ -87,9 +97,10 @@ class ClassTableViewController: UITableViewController {
         } else if(indexPath.section == 1){
             let sub = grades[indexPath.row] as! NSArray
             let name2 = sub[0] as! String
+            let arr:NSArray = categories[sub[2] as! String] as! NSArray
             let weight = sub[8] as! NSArray
             cell.textLabel?.text = name2
-            cell.detailTextLabel?.text = "\(weight.count)"
+            cell.detailTextLabel?.text = (arr[7] as? String)?.replacingOccurrences(of: " ", with: "")
         } else {
             let sub = class_content[indexPath.row] as! NSArray
             let name2 = sub[0] as! String
@@ -98,6 +109,32 @@ class ClassTableViewController: UITableViewController {
             cell.detailTextLabel?.text = ""
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let headerHeight:CGFloat = 25
+        switch section {
+        case 0:
+            if self.news_items.count > 0 {
+                return headerHeight
+            } else {
+                return headerHeight
+            }
+        case 1:
+            if self.grades.count > 0 {
+                return headerHeight
+            } else {
+                return 1
+            }
+        case 2:
+            if self.class_content.count > 0 {
+                return headerHeight
+            } else {
+                return 1
+            }
+        default:
+            return headerHeight
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -132,7 +169,9 @@ class ClassTableViewController: UITableViewController {
             let vc = GradeViewController()
             let sub = grades[indexPath.row] as! NSArray
             print(sub)
-            
+            vc.gradeobjects = self.gradeobjects
+            let arr:NSArray = categories[sub[2] as! String] as! NSArray
+            vc.catinfo.append(contentsOf: arr)
             vc.name = sub[0] as! String
             let fi = sub[sub.count-1] as! NSArray
             vc.grades.append(contentsOf: fi)
@@ -152,12 +191,27 @@ class ClassTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(section == 0){
-            return "news"
-        } else if(section == 1){
-            return "grades"
-        } else {
-            return "files"
+        switch section {
+        case 0:
+            if self.news_items.count > 0 {
+                return "news"
+            } else {
+                return nil
+            }
+        case 1:
+            if self.grades.count > 0 {
+                return "grades"
+            } else {
+                return nil
+            }
+        case 2:
+            if self.class_content.count > 0 {
+                return "files"
+            } else {
+                return nil
+            }
+        default:
+            return nil
         }
     }
 
@@ -198,6 +252,7 @@ class ClassTableViewController: UITableViewController {
 
     
     func retrieveNews(){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         print("Requesting news...")
         Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/news/").responseJSON { response in
             //debugPrint(response)
@@ -219,6 +274,7 @@ class ClassTableViewController: UITableViewController {
                     self.news_items.append(element)
                 }
                 self.tableView.reloadData()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case .failure(let error):
                 print("Request failed with error: \(error)")
             }
@@ -228,6 +284,7 @@ class ClassTableViewController: UITableViewController {
     }
     
     func retrieveGrades(){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         print("Requesting grades...")
         Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/grades/categories/").responseJSON { response in
             //debugPrint(response)
@@ -235,7 +292,8 @@ class ClassTableViewController: UITableViewController {
             case .success(let data):
                 let json = JSON(data)
                 for (subJson) in json.arrayValue {
-                    //print(subJson)
+                    print("GRADES")
+                    print(subJson)
                     var sub_arr = [Any]()
                     sub_arr.append(subJson["Name"].stringValue)
                     sub_arr.append(subJson["MaxPoints"].stringValue)
@@ -259,37 +317,78 @@ class ClassTableViewController: UITableViewController {
                     self.grades.append(sub_arr as Array)
                 }
                 self.tableView.reloadData()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case .failure(let error):
                 print("Request failed with error: \(error)")
             }
             //self.debugActivity.stopAnimating()
             
         }
-//        Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/grades/").responseJSON { response in
-//            //debugPrint(response)
-//            switch response.result {
-//            case .success(let data):
-//                let json = JSON(data)
-//                for (subJson) in json.arrayValue {
-//                    //print(subJson)
-//                    var sub_arr = [Any]()
-//                    sub_arr.append(subJson["Name"].stringValue)
-//                    sub_arr.append(subJson["Id"].stringValue)
-//                    sub_arr.append(subJson["CategoryId"].stringValue)
-//                    sub_arr.append(subJson["GradeSchemeUrl"].stringValue)
-//                    sub_arr.append(subJson["MaxPoints"].stringValue)
-//                    sub_arr.append(subJson["Weight"].stringValue)
-//                    self.grades.append(sub_arr as Array)
-//                }
-//            case .failure(let error):
-//                print("Request failed with error: \(error)")
-//            }
-//            //self.debugActivity.stopAnimating()
-//            
-//        }
+    }
+    
+    func betterGrades() {
+        //https://learn.colorado.edu/d2l/api/le/1.5/172556/grades/values/myGradeValues/
+        
+        Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/grades/values/myGradeValues/").responseJSON { response in
+                        switch response.result {
+                        case .success(let data):
+                            let json = JSON(data)
+                            
+                            for (subJson) in json.arrayValue {
+                                //print(subJson)
+                                //var sub_arr = [Any]()
+                                if subJson["GradeObjectTypeName"].stringValue == "Category" {
+                                    var subsub = [Any]()
+                                    subsub.append(subJson["GradeObjectName"].stringValue)
+                                    subsub.append(subJson["PointsNumerator"].intValue)
+                                    subsub.append(subJson["PrivateComments"].arrayValue)
+                                    subsub.append(subJson["GradeObjectIdentifier"].intValue)
+                                    subsub.append(subJson["GradeObjectTypeName"].stringValue)
+                                    subsub.append(subJson["PointsDenominator"].intValue)
+                                    subsub.append(subJson["WeightedDenominator"].intValue)
+                                    subsub.append(subJson["DisplayedGrade"].stringValue)
+                                    subsub.append(subJson["Comments"].arrayValue)
+                                    subsub.append(subJson["GradeObjectType"].stringValue)
+                                    subsub.append(subJson["WeightedNumerator"].intValue)
+                                    self.categories.updateValue(subsub, forKey: subJson["GradeObjectIdentifier"].stringValue)
+                                } else {
+                                    var subsub = [Any]()
+                                    subsub.append(subJson["GradeObjectName"].stringValue)
+                                    subsub.append(subJson["PointsNumerator"].intValue)
+                                    subsub.append(subJson["PrivateComments"].arrayValue)
+                                    subsub.append(subJson["GradeObjectIdentifier"].intValue)
+                                    subsub.append(subJson["GradeObjectTypeName"].stringValue)
+                                    subsub.append(subJson["PointsDenominator"].intValue)
+                                    subsub.append(subJson["WeightedDenominator"].intValue)
+                                    subsub.append(subJson["DisplayedGrade"].stringValue)
+                                    subsub.append(subJson["Comments"].arrayValue)
+                                    subsub.append(subJson["GradeObjectType"].stringValue)
+                                    subsub.append(subJson["WeightedNumerator"].intValue)
+                                    self.gradeobjects.updateValue(subsub, forKey: subJson["GradeObjectIdentifier"].stringValue)
+                                }
+//                                sub_arr.append(subJson["GradeObjectName"].stringValue)
+//                                sub_arr.append(subJson["PointsNumerator"].intValue)
+//                                sub_arr.append(subJson["PrivateComments"].arrayValue)
+//                                sub_arr.append(subJson["GradeObjectIdentifier"].intValue)
+//                                sub_arr.append(subJson["GradeObjectTypeName"].stringValue)
+//                                sub_arr.append(subJson["PointsDenominator"].intValue)
+//                                sub_arr.append(subJson["WeightedDenominator"].intValue)
+//                                sub_arr.append(subJson["DisplayedGrade"].stringValue)
+//                                sub_arr.append(subJson["Comments"].arrayValue)
+//                                sub_arr.append(subJson["GradeObjectType"].stringValue)
+//                                sub_arr.append(subJson["WeightedNumerator"].intValue)
+                            }
+                            print(self.categories)
+                            self.tableView.reloadData()
+                        case .failure(let error):
+                            print("Request failed with error: \(error)")
+                        }
+                        
+                    }
     }
     
     func retrieveClassContent(){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         print("Requesting content...")
         Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/content/root/").responseJSON { response in
             //debugPrint(response)
@@ -315,6 +414,7 @@ class ClassTableViewController: UITableViewController {
                     self.class_content.append(element)
                 }
                 self.tableView.reloadData()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
             case .failure(let error):
                 print("Request failed with error: \(error)")
             }

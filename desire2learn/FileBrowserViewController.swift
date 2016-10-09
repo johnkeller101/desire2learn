@@ -46,10 +46,14 @@ class FileBrowserViewController: UIViewController, UITableViewDelegate, UITableV
         let content_name = files_sub[0] as? String
         if files_sub[1] as? String == "0" {
             cell.textLabel?.text = "📁 "+content_name!
+            cell.detailTextLabel?.text = "not done"
+            cell.accessoryType = .none
         } else {
             cell.textLabel?.text = "📄 "+content_name!
+            cell.detailTextLabel?.text = ""
+            cell.accessoryType = .disclosureIndicator
         }
-        cell.detailTextLabel?.text = files_sub[1] as? String
+        
         return cell
     }
     
@@ -81,9 +85,14 @@ class FileBrowserViewController: UIViewController, UITableViewDelegate, UITableV
             //FOLDER
         } else {
             //FILE
-            let safariVC = SFSafariViewController(url: URL(string: "https://learn.colorado.edu/d2l/le/content/\(self.class_id)/topics/files/download/\(content_id!)/DirectFileTopicDownload")!)
-            safariVC.title = content_name
-            self.navigationController?.pushViewController(safariVC, animated: true)
+            let vc = FileAttachmentViewController()
+            vc.url = "https://learn.colorado.edu/d2l/le/content/\(self.class_id)/topics/files/download/\(content_id!)/DirectFileTopicDownload"
+            vc.name = content_name!
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+//            let safariVC = SFSafariViewController(url: URL(string: "https://learn.colorado.edu/d2l/le/content/\(self.class_id)/topics/files/download/\(content_id!)/DirectFileTopicDownload")!)
+//            safariVC.title = content_name
+//            self.navigationController?.pushViewController(safariVC, animated: true)
         }
         
         //https://learn.colorado.edu/d2l/le/content/172556/topics/files/download/2583306/DirectFileTopicDownload

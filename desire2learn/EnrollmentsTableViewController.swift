@@ -16,6 +16,10 @@ class EnrollmentsTableViewController: UITableViewController {
     var firstName: String = ""
     var lastName: String = ""
     var identifier: String = ""
+    
+    var userName = "joke1008"
+    var password = "s#N!PgZpSPw3H&mnewTH"
+    
     var loggedIn = false
     
     override func viewDidLoad() {
@@ -73,10 +77,18 @@ class EnrollmentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 0) {
-            return "Current Classes"
+            if classList.count > 0 {
+                return "Classes"
+            } else {
+                return nil
+            }
         } else {
             return "Other Enrollments"
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
 
@@ -120,6 +132,7 @@ class EnrollmentsTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let vc = segue.destination as? ClassTableViewController {
         let selected = tableView.indexPathForSelectedRow?.row
         if(tableView.indexPathForSelectedRow?.section == 0) {
@@ -128,7 +141,7 @@ class EnrollmentsTableViewController: UITableViewController {
             let role = sub[1] as! NSArray
             vc.class_name = (name[0] as? String)!
             vc.class_id = (role[0] as? NSNumber)!
-        } else if(tableView.indexPathForSelectedRow?.section == 0) {
+        } else if(tableView.indexPathForSelectedRow?.section == 1) {
             let sub = otherList[selected!] as! NSArray
             let name = sub[0] as! NSArray
             let role = sub[1] as! NSArray
@@ -145,36 +158,64 @@ class EnrollmentsTableViewController: UITableViewController {
     func login() {
         let loginRequest : Dictionary = [
             "Login":"Login",
-            "password" : "s#N!PgZpSPw3H&mnewTH",
-            "userName" : "joke1008"
+            "password" : self.password,
+            "userName" : self.userName
         ]
         
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         let serverUrl = "https://learn.colorado.edu/d2l/lp/auth/login/login.d2l"
-        // Both calls are equivalent
         Alamofire.request(serverUrl, method: .post, parameters: loginRequest).responseData { response in
-            print(loginRequest)
-            debugPrint(response)
+            
+            //debugPrint(response)
+            
             let res_url:String = (response.response!.url?.absoluteString)!
+            
             if(res_url.range(of: "BAD_CREDENTIALS") != nil) {
+                // User has entered an invalid login
                 print("Error logging in...")
+                // TODO: Add invalid login alert
                 return
             }
-            //self.progress.text = "Processing login..."
+            debugPrint(response.response?.allHeaderFields)
+            // Login requires going to the following URL to finish the login process...
             Alamofire.request("https://learn.colorado.edu/d2l/lp/auth/login/ProcessLoginActions.d2l").responseData { response in
                 print("Processing login...")
                 debugPrint(response)
-                //self.progress.text = "Loading profile information..."
+                
+                
+                
+                if let headerFields = response.response?.allHeaderFields as? [String: String], let URL = response.request?.url {
+                    print(URL, headerFields)
+                }
+                
                 Alamofire.request("https://learn.colorado.edu/d2l/api/lp/1.4/users/whoami").responseJSON { response in
-                    //debugPrint(response)
                     if let res = response.result.value as? [String: AnyObject] {
+                        print("here:::")
+                        print(Alamofire.URLSession.shared.configuration.httpCookieStorage?.cookies)
+                        
+                        if let cookies = Alamofire.URLSession.shared.configuration.httpCookieStorage?.cookies {
+                            let cookiesData: NSData = NSKeyedArchiver.archivedData(withRootObject: cookies) as NSData
+                            let userAccount = self.userName
+                            let domain = "d2l"
+                            let keychainQuery: [NSString: NSObject] = [
+                                kSecClass: kSecClassGenericPassword,
+                                kSecAttrAccount: userAccount as NSObject,
+                                kSecAttrService: domain as NSObject,
+                                kSecValueData: cookiesData]
+                            SecItemDelete(keychainQuery as CFDictionary) //Trying to delete the item from Keychaing just in case it already exists there
+                            let status: OSStatus = SecItemAdd(keychainQuery as CFDictionary, nil)
+                            if (status == errSecSuccess) {
+                                print("Cookies succesfully saved into Keychain for user \(self.userName)")
+                            }
+                        }
+                        
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         print(res)
-                        self.navigationController?.title = "\(res["FirstName"]!) \(res["LastName"]!)"
-                        print("Loaded \(res["FirstName"]!) \(res["LastName"]!)")
+                        self.title = "D2L: \(res["FirstName"]!) \(res["LastName"]!)"
+                        print("Loaded profile \(res["FirstName"]!) \(res["LastName"]!)")
                         self.loadClasses()
                     }
-                    //self.debugActivity.stopAnimating()
                     
                 }
             }
@@ -183,6 +224,7 @@ class EnrollmentsTableViewController: UITableViewController {
     }
     
     func loadClasses() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         Alamofire.request("https://learn.colorado.edu/d2l/api/lp/1.8/enrollments/myenrollments/").responseJSON {  response in
             switch response.result {
             case .success(let data):
@@ -205,7 +247,7 @@ class EnrollmentsTableViewController: UITableViewController {
                     }
                 }
                 self.tableView.reloadData()
-                
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 print(self.classList,self.classList.count)
             case .failure(let error):
                 print("Request failed with error: \(error)")

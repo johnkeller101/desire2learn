@@ -19,10 +19,17 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var article_id:String = ""
     var attachments: Array = [Any]()
     var details: Array = [Any]()
+
+    var contentView:UITextView = UITextView()
+    let inset:CGFloat = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(article_id)
+        print(html)
+        
+        // generate the content!
+        
         
         
         tableView = UITableView(frame: CGRect.zero, style: UITableViewStyle.grouped)
@@ -34,6 +41,21 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         view.addSubview(tableView)
         
         self.title = self.newstitle
+        
+        tableView.estimatedRowHeight = 44.0 // Replace with your actual estimation
+        // Automatic dimensions to tell the table view to use dynamic height
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        
+        let baseFont = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        let modifier = modifierWithBaseAttributes([NSFontAttributeName: baseFont], modifiers: [
+            selectMap("em", italic),
+            selectMap("a", italic),
+            selectMap("span.bold", bold),
+            ])
+        
+        let attributedString = NSAttributedString.attributedStringFromMarkup(html, withModifier: modifier)
+        contentView.attributedText = attributedString
         // Do any additional setup after loading the view.
     }
 
@@ -46,8 +68,31 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         var cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
         
+        
+        
         if indexPath.section == 0 {
-            cell.textLabel?.text = "Post Content"
+            cell.textLabel?.text = ""
+            
+            contentView.tag = 2
+            contentView.isScrollEnabled = false
+
+            
+            
+           // contentView.attributedText = attributedString
+            contentView.isEditable = false
+            
+            
+
+            let fixedWidth = self.view.frame.size.width
+            contentView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+            let newSize = contentView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+            var newFrame = CGRect(x: inset, y: inset, width: newSize.width - (inset*2), height: newSize.height - (inset*2))
+            newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+            contentView.frame = newFrame;
+            
+            cell.addSubview(contentView)
+            //let parser = parser
+            
         } else if indexPath.section == 1{
             let t = attachments[indexPath.row] as! NSArray
             let ti = t[0] as? String
@@ -71,7 +116,7 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.textLabel?.text = "📄 "+ti!
             cell.detailTextLabel?.text = String(describing: size!)+" "+ex
         } else {
-            cell.textLabel?.text = details[indexPath.row] as! String
+            cell.textLabel?.text = details[indexPath.row] as? String
         }
         
         return cell
@@ -89,10 +134,6 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
         } else {
             return details.count
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -118,9 +159,11 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             let t = attachments[indexPath.row] as! NSArray
             let file_id = t[2] as! String
             // https://learn.colorado.edu/d2l/le/news/widget/172556/FileProvider?newsId=222447&fileId=3252523
-            let safariVC = SFSafariViewController(url: URL(string: "https://learn.colorado.edu/d2l/le/news/widget/\(self.class_id)/FileProvider?newsId=\(article_id)&fileId=\(file_id)")!)
-            safariVC.title = t[0] as? String
-            self.navigationController?.pushViewController(safariVC, animated: true)
+            let vc = FileAttachmentViewController()
+            vc.url = "https://learn.colorado.edu/d2l/le/news/widget/\(self.class_id)/FileProvider?newsId=\(article_id)&fileId=\(file_id)"
+            vc.name = (t[0] as? String)!
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         } else {
             
         }
@@ -135,4 +178,11 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     */
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return contentView.frame.size.height + (inset*2)
+        } else {
+            return 44
+        }
+    }
 }
