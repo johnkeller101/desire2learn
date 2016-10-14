@@ -22,7 +22,7 @@ class FileAttachmentViewController: UIViewController {
         self.webView = WKWebView()
         
         
-        var cookiescript:String = ""
+        var cookiescript:[HTTPCookie] = [HTTPCookie()]
         
         let userAccount = "joke1008"
         let domain = "d2l"
@@ -39,28 +39,21 @@ class FileAttachmentViewController: UIViewController {
             if let unwrappedData = retrievedData {
                 if let cookies = NSKeyedUnarchiver.unarchiveObject(with: unwrappedData as Data) as? [HTTPCookie] {
                     // Add cookies to request
-                    cookiescript = getJSCookiesString(cookies: cookies)
+                    cookiescript = cookies
                     //request.addValue(script, forHTTPHeaderField: "Cookie")
                 }
             }
         }
-        
-        
-        let userContentController = WKUserContentController()
-        let jsCookie = WKUserScript(source: cookiescript, injectionTime: WKUserScriptInjectionTime.atDocumentStart, forMainFrameOnly: false)
-        userContentController.addUserScript(jsCookie)
-        let webViewConfig = WKWebViewConfiguration()
-        webViewConfig.userContentController = userContentController
-        self.webView = WKWebView(frame: self.view.bounds, configuration: webViewConfig)
-
+        self.webView = WKWebView(frame: self.view.bounds)
         self.webView?.sizeToFit()
-        //request.addValue(script, forHTTPHeaderField: "Cookie")
- 
-        let request = URLRequest(url: URL(string: "https://learn.colorado.edu")!)
+
+        var request = URLRequest(url: URL(string: url)!)
+        
+        let values = HTTPCookie.requestHeaderFields(with: cookiescript)
+        request.allHTTPHeaderFields = values
+        
         self.webView?.load(request)
         
-        let request2 = URLRequest(url: URL(string: url)!)
-        self.webView?.load(request2)
         //self.webView?.load(request)
 
         self.view.addSubview(self.webView!)

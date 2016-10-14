@@ -98,43 +98,64 @@ class ClassTableViewController: UITableViewController {
             let sub = grades[indexPath.row] as! NSArray
             let name2 = sub[0] as! String
             let arr:NSArray = categories[sub[2] as! String] as! NSArray
-            let weight = sub[8] as! NSArray
             cell.textLabel?.text = name2
             cell.detailTextLabel?.text = (arr[7] as? String)?.replacingOccurrences(of: " ", with: "")
         } else {
             let sub = class_content[indexPath.row] as! NSArray
             let name2 = sub[0] as! String
-            let count = sub[2] as! NSArray
             cell.textLabel?.text = "📁 "+name2
             cell.detailTextLabel?.text = ""
         }
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let headerHeight:CGFloat = 25
-        switch section {
-        case 0:
-            if self.news_items.count > 0 {
-                return headerHeight
-            } else {
-                return headerHeight
-            }
-        case 1:
-            if self.grades.count > 0 {
-                return headerHeight
-            } else {
-                return 1
-            }
-        case 2:
-            if self.class_content.count > 0 {
-                return headerHeight
-            } else {
-                return 1
-            }
-        default:
-            return headerHeight
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        let headerHeight:CGFloat = 25
+//        switch section {
+//        case 0:
+//            if self.news_items.count > 0 {
+//                return headerHeight
+//            } else {
+//                return headerHeight
+//            }
+//        case 1:
+//            if self.grades.count > 0 {
+//                return headerHeight
+//            } else {
+//                return 1
+//            }
+//        case 2:
+//            if self.class_content.count > 0 {
+//                return headerHeight
+//            } else {
+//                return 1
+//            }
+//        default:
+//            return headerHeight
+//        }
+//    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 30))
+        let titleLabel = UILabel(frame: CGRect(x: 15, y: 10, width: (self.view.frame.size.width/3)*2, height: 13))
+        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: UIFontWeightThin)
+        var title:String = ""
+        if self.news_items.count > 0 && section == 0 {
+            title = "news"
+        } else if self.grades.count > 0 && section == 1 {
+            title = "grades"
+        } else if self.class_content.count > 0 && section == 2 {
+            title = "files"
         }
+        titleLabel.text = title.uppercased()
+        titleLabel.textColor = UIColor.darkGray
+        
+        view.addSubview(titleLabel)
+        return view
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

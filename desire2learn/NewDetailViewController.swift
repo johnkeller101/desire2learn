@@ -21,7 +21,9 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
     var details: Array = [Any]()
 
     var contentView:UITextView = UITextView()
-    let inset:CGFloat = 5
+    let inset:CGFloat = 10
+    let tinset:CGFloat = 5
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
