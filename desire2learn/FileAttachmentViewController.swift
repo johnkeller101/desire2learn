@@ -24,7 +24,11 @@ class FileAttachmentViewController: UIViewController {
         
         var cookiescript:[HTTPCookie] = [HTTPCookie()]
         
-        let userAccount = "joke1008"
+        
+        let keychain = KeychainSwift()
+        keychain.synchronizable = true // Allow this keychain to be synced across devices
+        
+        let userAccount = keychain.get("d2lUsername")!
         let domain = "d2l"
         let keychainQueryForCookies: [NSString: NSObject] = [
             kSecClass: kSecClassGenericPassword,
