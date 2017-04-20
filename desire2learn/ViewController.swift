@@ -99,11 +99,11 @@ class ViewController: UIViewController {
     }
     
     func sendRequestRequest() {
-        guard let uname = self.username.text else {
+        guard self.username.text != nil else {
             print("ooops")
             return
         }
-        guard let pword = self.password.text else {
+        guard self.password.text != nil else {
             print("ooops")
             return
         }

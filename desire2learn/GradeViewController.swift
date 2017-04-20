@@ -35,7 +35,7 @@ class GradeViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
 
-        let refreshButton = UIBarButtonItem(title: "switch", style: .plain, target: self, action: #selector(GradeViewController.switchView))
+        let refreshButton = UIBarButtonItem(title: "🔄", style: .plain, target: self, action: #selector(GradeViewController.switchView))
         navigationItem.rightBarButtonItem = refreshButton
         
         self.title = self.name

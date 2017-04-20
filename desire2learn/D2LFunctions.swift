@@ -9,11 +9,7 @@
 import UIKit
 import Alamofire
 
-
 class D2LFunctions: NSObject {
-
-    //var userName = "joke1008"
-    //var password = "s#N!PgZpSPw3H&mnewTH"
     
     typealias apiSuccess = (_ result: NSDictionary?) -> Void
     typealias apiProgress = (_ result: NSDictionary?) -> Void // when you want to download or upload using Alamofire..
@@ -35,6 +31,10 @@ class D2LFunctions: NSObject {
         ]
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        
+        
+        
         
         let serverUrl = "https://learn.colorado.edu/d2l/lp/auth/login/login.d2l"
         Alamofire.request(serverUrl, method: .post, parameters: loginRequest).responseData { response in

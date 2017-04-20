@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nsa-zz-FXC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E192b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nsa-zz-FXC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
+        <!--Grades-->
         <scene sceneID="dFu-us-U3y">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nsa-zz-FXC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Grades" image="drop" id="KdH-f7-poW" customClass="RAMAnimatedTabBarItem" customModule="desire2learn" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="A0A-tq-CFf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -24,34 +31,43 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iGC-cx-QbA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="U6d-SO-0hO" customClass="RAMBounceAnimation" customModule="desire2learn" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="431" y="74"/>
+            <point key="canvasLocation" x="388" y="72"/>
         </scene>
         <!--Desire2Learn-->
         <scene sceneID="AHH-EF-xZn">
             <objects>
                 <tableViewController id="7vN-b4-YFB" customClass="EnrollmentsTableViewController" customModule="desire2learn" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ro0-Bb-aSr">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="57" sectionHeaderHeight="18" sectionFooterHeight="18" id="ro0-Bb-aSr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="classCell" textLabel="EvP-pd-Sk5" style="IBUITableViewCellStyleDefault" id="yj1-lF-XIR">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="classCell" textLabel="31r-2t-iq8" detailTextLabel="yle-cs-mdN" rowHeight="57" style="IBUITableViewCellStyleSubtitle" id="yj1-lF-XIR" customClass="ColoredGradeTableViewCell" customModule="desire2learn" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yj1-lF-XIR" id="jor-qL-dhx">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="56.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EvP-pd-Sk5">
-                                            <rect key="frame" x="15" y="0.0" width="325" height="43"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="31r-2t-iq8">
+                                            <rect key="frame" x="15" y="11" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="yle-cs-mdN">
+                                            <rect key="frame" x="15" y="31.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <connections>
                                     <segue destination="6oi-kw-vnz" kind="show" id="MWE-fd-YDm"/>
                                 </connections>
@@ -68,16 +84,22 @@
                                 <action selector="logoutButton:" destination="7vN-b4-YFB" id="ay3-ZS-DPq"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="QSJ-nH-GfK">
+                            <connections>
+                                <action selector="refreshButton:" destination="7vN-b4-YFB" id="2xS-8L-j03"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="logoutButton" destination="0gc-yL-dlR" id="w0X-51-VPj"/>
+                        <outlet property="refreshButton" destination="QSJ-nH-GfK" id="yM7-2Z-Gbh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJg-eL-EEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1231" y="73"/>
+            <point key="canvasLocation" x="1229.5999999999999" y="72.413793103448285"/>
         </scene>
-        <!--Desire2Learn-->
+        <!--CU Boulder-->
         <scene sceneID="YNY-ZD-aAg">
             <objects>
                 <tableViewController id="6oi-kw-vnz" customClass="ClassTableViewController" customModule="desire2learn" customModuleProvider="target" sceneMemberID="viewController">
@@ -87,23 +109,23 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="infoCell" textLabel="EQy-yE-teo" detailTextLabel="cds-3j-2oU" style="IBUITableViewCellStyleValue1" id="DZX-e2-Lbm">
-                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DZX-e2-Lbm" id="zch-se-WR8">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EQy-yE-teo">
-                                            <rect key="frame" x="15" y="13" width="30" height="18"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="EQy-yE-teo">
+                                            <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cds-3j-2oU">
-                                            <rect key="frame" x="305" y="15" width="35" height="16"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="cds-3j-2oU">
+                                            <rect key="frame" x="307" y="17" width="33" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -116,7 +138,7 @@
                             <outlet property="delegate" destination="6oi-kw-vnz" id="ZqB-ch-55Z"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Desire2Learn" id="ycw-ls-OsS"/>
+                    <navigationItem key="navigationItem" title="CU Boulder" id="ycw-ls-OsS"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e4z-so-tOq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -236,12 +258,140 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ONo-ez-qch" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Dg6-tn-r7m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-442.39999999999998" y="72.413793103448285"/>
+            <point key="canvasLocation" x="-1370" y="72"/>
+        </scene>
+        <!--Item2-->
+        <scene sceneID="zUl-Pp-JDc">
+            <objects>
+                <viewController id="EUD-Ra-KoY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qUQ-kt-WVS"/>
+                        <viewControllerLayoutGuide type="bottom" id="XzR-Dp-69p"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bw8-K9-hjr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RotationAnimation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFz-uv-iq4">
+                                <rect key="frame" x="14" y="184" width="348" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="348" id="9FF-6o-NuW"/>
+                                    <constraint firstAttribute="height" constant="71" id="Es6-05-54D"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="zFz-uv-iq4" secondAttribute="centerY" constant="114.5" id="1qi-Nt-MSj"/>
+                            <constraint firstAttribute="centerX" secondItem="zFz-uv-iq4" secondAttribute="centerX" id="7LS-xA-Sgh"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item2" image="Grades" id="skL-k3-iuW" customClass="RAMAnimatedTabBarItem" customModule="desire2learn" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Duh-qY-5FN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2926" y="828"/>
+        </scene>
+        <!--Animated Tab Bar Controller-->
+        <scene sceneID="Lid-qN-Kol">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="87h-VU-77C" customClass="RAMAnimatedTabBarController" customModule="desire2learn" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="7Zg-qu-dg3">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="fMe-4p-Td9" kind="relationship" relationship="viewControllers" id="u4s-49-rsj"/>
+                        <segue destination="EUD-Ra-KoY" kind="relationship" relationship="viewControllers" id="9RF-ck-EOd"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWI-xn-i7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3553" y="59"/>
+        </scene>
+        <!--Item4-->
+        <scene sceneID="wMo-dP-2ad">
+            <objects>
+                <viewController id="fMe-4p-Td9" customClass="ViewController" customModule="desire2learn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lAS-ra-gtw"/>
+                        <viewControllerLayoutGuide type="bottom" id="jhq-r1-KbY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1jV-8e-FnI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bounce Animation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ryh-1G-r0a">
+                                <rect key="frame" x="14" y="184" width="348" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="348" id="Z52-Eg-2BB"/>
+                                    <constraint firstAttribute="height" constant="71" id="ppm-S6-zjY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LS0-yg-1BQ">
+                                <rect key="frame" x="-4" y="580" width="190.5" height="30"/>
+                                <state key="normal" title="Show Badge"/>
+                                <connections>
+                                    <action selector="showBadgeHandelr:" destination="fMe-4p-Td9" eventType="touchUpInside" id="KCa-kR-QCc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5c-La-jt4">
+                                <rect key="frame" x="188.5" y="580" width="190.5" height="30"/>
+                                <state key="normal" title="Hide Badge"/>
+                                <connections>
+                                    <action selector="hideBadgeHandler:" destination="fMe-4p-Td9" eventType="touchUpInside" id="r6k-8a-kzB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Ryh-1G-r0a" secondAttribute="centerX" id="BkB-mC-tvo"/>
+                            <constraint firstAttribute="centerY" secondItem="Ryh-1G-r0a" secondAttribute="centerY" constant="114.5" id="HqO-sO-c6b"/>
+                            <constraint firstItem="jhq-r1-KbY" firstAttribute="top" secondItem="f5c-La-jt4" secondAttribute="bottom" constant="8" id="Uom-Kr-txG"/>
+                            <constraint firstItem="LS0-yg-1BQ" firstAttribute="leading" secondItem="1jV-8e-FnI" secondAttribute="leadingMargin" constant="-20" id="VxK-Mo-FPh"/>
+                            <constraint firstItem="jhq-r1-KbY" firstAttribute="top" secondItem="LS0-yg-1BQ" secondAttribute="bottom" constant="8" id="dUL-gk-QGS"/>
+                            <constraint firstItem="f5c-La-jt4" firstAttribute="leading" secondItem="LS0-yg-1BQ" secondAttribute="trailing" constant="2" id="v1D-LU-Tsr"/>
+                            <constraint firstItem="LS0-yg-1BQ" firstAttribute="width" secondItem="f5c-La-jt4" secondAttribute="width" id="ylA-iK-UNI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="f5c-La-jt4" secondAttribute="trailing" constant="-20" id="zm3-uV-4z7"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item4" image="Courses" id="mhw-R6-m0a" customClass="RAMAnimatedTabBarItem" customModule="desire2learn" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="U6d-SO-0hO" id="b1Y-k5-Z7A"/>
+                        </connections>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GiU-bO-rso" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2345" y="-160"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Courses" width="28" height="28"/>
+        <image name="Grades" width="28" height="24"/>
         <image name="boulder.jpg" width="3457" height="2425"/>
         <image name="culogo.png" width="1000" height="202"/>
+        <image name="drop" width="24" height="24"/>
         <image name="onepassword-button" width="27" height="27"/>
     </resources>
 </document>

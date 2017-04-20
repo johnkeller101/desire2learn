@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4640D5F71DFA1C6800B7B745 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4640D5F41DFA1C6800B7B745 /* UIViewExtension.swift */; };
 		465D7C861DA6D97000DD874C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7C851DA6D97000DD874C /* AppDelegate.swift */; };
 		465D7C881DA6D97000DD874C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7C871DA6D97000DD874C /* ViewController.swift */; };
 		465D7C8B1DA6D97000DD874C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465D7C891DA6D97000DD874C /* Main.storyboard */; };
@@ -29,12 +30,14 @@
 		466D23001DAAC45A0034759C /* Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22FB1DAAC45A0034759C /* Parse.swift */; };
 		466D23011DAAC45A0034759C /* SmallCaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22FC1DAAC45A0034759C /* SmallCaps.swift */; };
 		466D23021DAAC45A0034759C /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22FD1DAAC45A0034759C /* UIFont.swift */; };
+		467609291DF9EC420028CAB5 /* ColoredGradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467609281DF9EC420028CAB5 /* ColoredGradeTableViewCell.swift */; };
 		4682FD471DC91AC900D02AAB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4682FD461DC91AC900D02AAB /* LoginViewController.swift */; };
 		4682FD511DC91FC100D02AAB /* KeychainSwiftDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4682FD501DC91FC100D02AAB /* KeychainSwiftDistrib.swift */; };
 		46A4460B1DC41604009BCAD2 /* D2LFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A4460A1DC41604009BCAD2 /* D2LFunctions.swift */; };
 		46BF45D91DCBE31300E211A2 /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 46BF45D81DCBE31300E211A2 /* OnePasswordExtension.m */; };
 		46BF45E21DCBE31900E211A2 /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46BF45E11DCBE31900E211A2 /* 1Password.xcassets */; };
 		46BF45E51DCBF10900E211A2 /* boulder_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 46BF45E41DCBF10900E211A2 /* boulder_2.jpg */; };
+		46E784501DEE339B008B508A /* db.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 46E7844F1DEE339B008B508A /* db.sqlite3 */; };
 		46F7CA431DBF225800C8460B /* boulder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 46F7CA421DBF225800C8460B /* boulder.jpg */; };
 		46F7CA4C1DBF245E00C8460B /* culogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 46F7CA4B1DBF245E00C8460B /* culogo.png */; };
 		E8DE20304CD7258369B652CF /* Pods_desire2learn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F4CD526CB0C41B3080537C /* Pods_desire2learn.framework */; };
@@ -114,6 +117,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4640D5F01DFA1C2B00B7B745 /* Wallet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wallet.framework; path = "../../../../Library/Developer/Xcode/DerivedData/desire2learn-geacegoikeenuqdaonujopdmerxa/Build/Products/Debug-iphoneos/Wallet/Wallet.framework"; sourceTree = "<group>"; };
+		4640D5F41DFA1C6800B7B745 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		465D7C821DA6D97000DD874C /* desire2learn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = desire2learn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		465D7C851DA6D97000DD874C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		465D7C871DA6D97000DD874C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 		466D22FB1DAAC45A0034759C /* Parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parse.swift; sourceTree = "<group>"; };
 		466D22FC1DAAC45A0034759C /* SmallCaps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallCaps.swift; sourceTree = "<group>"; };
 		466D22FD1DAAC45A0034759C /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		467609281DF9EC420028CAB5 /* ColoredGradeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColoredGradeTableViewCell.swift; sourceTree = "<group>"; };
 		4682FD461DC91AC900D02AAB /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4682FD501DC91FC100D02AAB /* KeychainSwiftDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwiftDistrib.swift; sourceTree = "<group>"; };
 		46A4460A1DC41604009BCAD2 /* D2LFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = D2LFunctions.swift; sourceTree = "<group>"; };
@@ -146,6 +152,7 @@
 		46BF45E11DCBE31900E211A2 /* 1Password.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
 		46BF45E31DCBE69200E211A2 /* desire2learn.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = desire2learn.entitlements; sourceTree = "<group>"; };
 		46BF45E41DCBF10900E211A2 /* boulder_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = boulder_2.jpg; sourceTree = "<group>"; };
+		46E7844F1DEE339B008B508A /* db.sqlite3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = db.sqlite3; sourceTree = "<group>"; };
 		46F7CA421DBF225800C8460B /* boulder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = boulder.jpg; sourceTree = "<group>"; };
 		46F7CA4B1DBF245E00C8460B /* culogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = culogo.png; sourceTree = "<group>"; };
 		54F4CD526CB0C41B3080537C /* Pods_desire2learn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_desire2learn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,11 +196,11 @@
 		465D7C841DA6D97000DD874C /* desire2learn */ = {
 			isa = PBXGroup;
 			children = (
-				46BF45E31DCBE69200E211A2 /* desire2learn.entitlements */,
-				465D7C971DA6EC9500DD874C /* Alamofire.xcodeproj */,
+				4640D5F41DFA1C6800B7B745 /* UIViewExtension.swift */,
 				465D7C851DA6D97000DD874C /* AppDelegate.swift */,
 				465D7C871DA6D97000DD874C /* ViewController.swift */,
 				46A4460A1DC41604009BCAD2 /* D2LFunctions.swift */,
+				467609281DF9EC420028CAB5 /* ColoredGradeTableViewCell.swift */,
 				465D7CB71DA702D700DD874C /* EnrollmentsTableViewController.swift */,
 				465D7CBB1DA739E000DD874C /* ClassTableViewController.swift */,
 				465D7CBD1DA74F0600DD874C /* NewDetailViewController.swift */,
@@ -201,25 +208,17 @@
 				466238961DA8C0DE004D552B /* GradeViewController.swift */,
 				466D22891DA956B80034759C /* FileAttachmentViewController.swift */,
 				4682FD461DC91AC900D02AAB /* LoginViewController.swift */,
-				4682FD501DC91FC100D02AAB /* KeychainSwiftDistrib.swift */,
 				465D7C891DA6D97000DD874C /* Main.storyboard */,
-				465D7C8C1DA6D97000DD874C /* Assets.xcassets */,
 				465D7C8E1DA6D97000DD874C /* LaunchScreen.storyboard */,
-				465D7CB91DA7169800DD874C /* SwiftyJSON.swift */,
-				465D7C911DA6D97000DD874C /* Info.plist */,
-				465D7CB51DA6F7D300DD874C /* culogo.jpg */,
-				46F7CA4B1DBF245E00C8460B /* culogo.png */,
 				466D22F91DAAC45A0034759C /* MarkupElement.swift */,
 				466D22FA1DAAC45A0034759C /* Modifier.swift */,
 				466D22FB1DAAC45A0034759C /* Parse.swift */,
 				466D22FC1DAAC45A0034759C /* SmallCaps.swift */,
 				466D22FD1DAAC45A0034759C /* UIFont.swift */,
-				46F7CA421DBF225800C8460B /* boulder.jpg */,
-				46BF45E41DCBF10900E211A2 /* boulder_2.jpg */,
+				46E7844F1DEE339B008B508A /* db.sqlite3 */,
+				465D7C8C1DA6D97000DD874C /* Assets.xcassets */,
+				46E784461DEE2F90008B508A /* Resources */,
 				466D22941DAAC2250034759C /* desire2learn-Bridging-Header.h */,
-				46BF45D71DCBE31300E211A2 /* OnePasswordExtension.h */,
-				46BF45D81DCBE31300E211A2 /* OnePasswordExtension.m */,
-				46BF45E11DCBE31900E211A2 /* 1Password.xcassets */,
 			);
 			path = desire2learn;
 			sourceTree = "<group>";
@@ -241,11 +240,39 @@
 		465D7CC21DA8A8AA00DD874C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4640D5F01DFA1C2B00B7B745 /* Wallet.framework */,
 				466D22921DA957A80034759C /* WebKit.framework */,
 				465D7CC31DA8A8AA00DD874C /* SafariServices.framework */,
 				54F4CD526CB0C41B3080537C /* Pods_desire2learn.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46E784461DEE2F90008B508A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				465D7CB91DA7169800DD874C /* SwiftyJSON.swift */,
+				4682FD501DC91FC100D02AAB /* KeychainSwiftDistrib.swift */,
+				465D7C911DA6D97000DD874C /* Info.plist */,
+				465D7C971DA6EC9500DD874C /* Alamofire.xcodeproj */,
+				46BF45E31DCBE69200E211A2 /* desire2learn.entitlements */,
+				465D7CB51DA6F7D300DD874C /* culogo.jpg */,
+				46F7CA4B1DBF245E00C8460B /* culogo.png */,
+				46F7CA421DBF225800C8460B /* boulder.jpg */,
+				46BF45E41DCBF10900E211A2 /* boulder_2.jpg */,
+				46E7844E1DEE2FCB008B508A /* 1Password Extension */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		46E7844E1DEE2FCB008B508A /* 1Password Extension */ = {
+			isa = PBXGroup;
+			children = (
+				46BF45D71DCBE31300E211A2 /* OnePasswordExtension.h */,
+				46BF45D81DCBE31300E211A2 /* OnePasswordExtension.m */,
+				46BF45E11DCBE31900E211A2 /* 1Password.xcassets */,
+			);
+			name = "1Password Extension";
 			sourceTree = "<group>";
 		};
 		53D466C21DC85A12AEE1691E /* Pods */ = {
@@ -389,6 +416,7 @@
 				465D7C901DA6D97000DD874C /* LaunchScreen.storyboard in Resources */,
 				465D7C8D1DA6D97000DD874C /* Assets.xcassets in Resources */,
 				46BF45E51DCBF10900E211A2 /* boulder_2.jpg in Resources */,
+				46E784501DEE339B008B508A /* db.sqlite3 in Resources */,
 				46F7CA4C1DBF245E00C8460B /* culogo.png in Resources */,
 				46BF45E21DCBE31900E211A2 /* 1Password.xcassets in Resources */,
 				46F7CA431DBF225800C8460B /* boulder.jpg in Resources */,
@@ -454,6 +482,8 @@
 			files = (
 				466D23011DAAC45A0034759C /* SmallCaps.swift in Sources */,
 				465D7CBC1DA739E000DD874C /* ClassTableViewController.swift in Sources */,
+				4640D5F71DFA1C6800B7B745 /* UIViewExtension.swift in Sources */,
+				467609291DF9EC420028CAB5 /* ColoredGradeTableViewCell.swift in Sources */,
 				466238971DA8C0DE004D552B /* GradeViewController.swift in Sources */,
 				46BF45D91DCBE31300E211A2 /* OnePasswordExtension.m in Sources */,
 				465D7C881DA6D97000DD874C /* ViewController.swift in Sources */,

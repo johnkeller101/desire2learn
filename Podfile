@@ -8,5 +8,6 @@ target 'desire2learn' do
   # Pods for desire2learn
 pod 'Locksmith'
 pod 'Alamofire'
+pod 'RAMAnimatedTabBarController'
 
 end

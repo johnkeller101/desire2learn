@@ -12,6 +12,11 @@ import Alamofire
 class EnrollmentsTableViewController: UITableViewController {
 
     @IBOutlet weak var logoutButton: UIBarButtonItem!
+
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
+    
+    var otherEnrollments = [String: Any]()
+    var classEnrollments = [String: Any]()
     
     var classList:Array = [Any]()
     var otherList:Array = [Any]()
@@ -24,9 +29,14 @@ class EnrollmentsTableViewController: UITableViewController {
     
     var loggedIn = false
     
+    var universityName: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        self.tableView.separatorStyle = .none
+//        self.tableView.backgroundColor = UIColor(white:0.09, alpha:1.0)
+        
         let keychain = KeychainSwift()
         keychain.synchronizable = true // Allow this keychain to be synced across devices
         
@@ -76,7 +86,7 @@ class EnrollmentsTableViewController: UITableViewController {
         if(otherList.count > 0){
             return 2
         } else {
-            return 1
+            return 2
         }
     }
 
@@ -89,39 +99,76 @@ class EnrollmentsTableViewController: UITableViewController {
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> ColoredGradeTableViewCell {
+        let cell:ColoredGradeTableViewCell = tableView.dequeueReusableCell(withIdentifier: "classCell", for: indexPath) as! ColoredGradeTableViewCell
         
         if(indexPath.section == 0){
             let sub = classList[indexPath.row] as! NSArray
+            print(sub)
             let name = sub[0] as! NSArray
-            let role = sub[1] as! NSArray
-            cell.textLabel?.text = name[0] as? String
-            cell.detailTextLabel?.text = role[0] as? String
+            let role = sub[3] as! NSArray
+            let full_name : String = (name[0] as? String)!
+            let strSplit = full_name.characters.split(separator: ":")
+            
+            let c_name:String = String(strSplit.first!)
+            let c_dept:String = full_name.replacingOccurrences(of: c_name+":", with: "")
+            
+            cell.textLabel?.text = c_dept.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            cell.detailTextLabel?.text = c_name.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+//            cell.backgroundColor = UIColor(red:0.91, green:0.3, blue:0.24, alpha:1.0)
         } else {
             let sub = otherList[indexPath.row] as! NSArray
             let name = sub[0] as! NSArray
-            let role = sub[1] as! NSArray
+            let role = sub[3] as! NSArray
             cell.textLabel?.text = name[0] as? String
             cell.detailTextLabel?.text = role[0] as? String
+//            cell.backgroundColor = UIColor(red:0.91, green:0.3, blue:0.24, alpha:1.0)
         }
-        return cell
+        return cell 
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 0) {
             if classList.count > 0 {
-                return "Classes"
+                return "D2L Classes"
             } else {
                 return nil
             }
         } else {
-            return "Other Enrollments"
+            return "Moodle (incomplete)"
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if (section == 1) {
+            let footer_view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 20))
+            footer_view.backgroundColor = UIColor.clear
+            
+            let label = UILabel(frame: footer_view.frame)
+            label.backgroundColor = UIColor.clear
+            if(firstName.characters.count > 0){
+                label.text = "Logged in as " + firstName + " " + lastName
+            }
+            label.textColor = UIColor.lightGray
+            label.textAlignment = .center
+            label.font = label.font.withSize(12)
+            
+            footer_view.addSubview(label)
+            return footer_view
+        }
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if(section == 1){
+            return 10
+        } else {
+            return 0
+        }
     }
     
     // MARK: - Navigation
@@ -142,6 +189,7 @@ class EnrollmentsTableViewController: UITableViewController {
             let role = sub[1] as! NSArray
             vc.class_name = (name[0] as? String)!
             vc.class_id = (role[0] as? NSNumber)!
+            
             }
         }
     }
@@ -157,6 +205,7 @@ class EnrollmentsTableViewController: UITableViewController {
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
+        
         let serverUrl = "https://learn.colorado.edu/d2l/lp/auth/login/login.d2l"
         Alamofire.request(serverUrl, method: .post, parameters: loginRequest).responseData { response in
             
@@ -170,7 +219,7 @@ class EnrollmentsTableViewController: UITableViewController {
                 // TODO: Add invalid login alert
                 return
             }
-            debugPrint(response.response?.allHeaderFields)
+            debugPrint(response.response?.allHeaderFields ?? "error recieving header fields")
             // Login requires going to the following URL to finish the login process...
             Alamofire.request("https://learn.colorado.edu/d2l/lp/auth/login/ProcessLoginActions.d2l").responseData { response in
                 print("Processing login...")
@@ -185,7 +234,7 @@ class EnrollmentsTableViewController: UITableViewController {
                 Alamofire.request("https://learn.colorado.edu/d2l/api/lp/1.4/users/whoami").responseJSON { response in
                     if let res = response.result.value as? [String: AnyObject] {
                         print("here:::")
-                        print(Alamofire.URLSession.shared.configuration.httpCookieStorage?.cookies)
+                        print(Alamofire.URLSession.shared.configuration.httpCookieStorage?.cookies ?? "error printing cookie")
                         
                         if let cookies = Alamofire.URLSession.shared.configuration.httpCookieStorage?.cookies {
                             let cookiesData: NSData = NSKeyedArchiver.archivedData(withRootObject: cookies) as NSData
@@ -205,8 +254,10 @@ class EnrollmentsTableViewController: UITableViewController {
                         
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         print(res)
-                        self.title = "D2L: \(res["FirstName"]!) \(res["LastName"]!)"
+                        //self.title = "D2L: \(res["FirstName"]!) \(res["LastName"]!)"
                         print("Loaded profile \(res["FirstName"]!) \(res["LastName"]!)")
+                        self.firstName = res["FirstName"] as! String
+                        self.lastName = res["LastName"] as! String
                         self.loadClasses()
                     }
                     
@@ -227,18 +278,31 @@ class EnrollmentsTableViewController: UITableViewController {
                     
                     //print(subJson["Access"])
                     if(subJson["OrgUnit"]["Type"]["Name"].string == "Course Offering"){
-                        print(subJson)
+                        //print(subJson)
+                        if(subJson["OrgUnit"]["Code"]).stringValue.contains("cmty") {
+                            let sub = [subJson["OrgUnit"]["Name"].stringValue: subJson.dictionaryObject!]
+                            self.otherEnrollments.updateValue(sub, forKey: subJson["OrgUnit"]["Name"].stringValue)
+                        } else {
+                            let sub = [subJson["OrgUnit"]["Name"].stringValue: subJson.dictionaryObject!]
+                            self.classEnrollments.updateValue(sub, forKey: subJson["OrgUnit"]["Name"].stringValue)
+                        }
+                        
                         if(subJson["OrgUnit"]["Code"]).stringValue.contains("cmty") {
                             let element:Array = [[subJson["OrgUnit"]["Name"].stringValue],[subJson["OrgUnit"]["Id"].intValue],[subJson["Access"]["CanAccess"].boolValue],[subJson["Access"]["ClasslistRoleName"].stringValue]] as Array
-                            print("adding",subJson["OrgUnit"]["Name"].stringValue)
+                            //print("adding",subJson["OrgUnit"]["Name"].stringValue)
                             self.otherList.append(element)
                         } else {
                             let element:Array = [[subJson["OrgUnit"]["Name"].stringValue],[subJson["OrgUnit"]["Id"].intValue],[subJson["Access"]["CanAccess"].boolValue],[subJson["Access"]["ClasslistRoleName"].stringValue]] as Array
-                            print("adding",subJson["OrgUnit"]["Name"].stringValue)
+                            //print("adding",subJson["OrgUnit"]["Name"].stringValue)
                             self.classList.append(element)
                         }
                     }
                 }
+                print("-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/")
+                print(self.classEnrollments)
+                print(self.otherEnrollments)
+                print("-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/")
+                
                 self.tableView.reloadData()
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 print(self.classList,self.classList.count)
@@ -249,12 +313,22 @@ class EnrollmentsTableViewController: UITableViewController {
         }
     }
 
+    @IBAction func refreshButton(_ sender: Any) {
+        
+        // Remove all the contents that (may) have loaded
+        self.classList.removeAll()
+        self.otherList.removeAll()
+        self.tableView.reloadData()
+        
+        self.login()
+    }
+    
     @IBAction func logoutButton(_ sender: Any) {
         
         // Remove all the contents that (may) have loaded
         self.classList.removeAll()
         self.otherList.removeAll()
-        
+        self.tableView.reloadData()
         
         let keychain = KeychainSwift()
         keychain.synchronizable = true // Allow this keychain to be synced across devices

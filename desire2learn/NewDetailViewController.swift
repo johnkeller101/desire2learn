@@ -89,7 +89,7 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             contentView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
             let newSize = contentView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
             var newFrame = CGRect(x: inset, y: inset, width: newSize.width - (inset*2), height: newSize.height - (inset*2))
-            newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+            newFrame.size = CGSize(width: max(newSize.width, fixedWidth)-(inset*2), height: newSize.height)
             contentView.frame = newFrame;
             
             cell.addSubview(contentView)

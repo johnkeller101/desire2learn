@@ -411,6 +411,8 @@ class ClassTableViewController: UITableViewController {
     func retrieveClassContent(){
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         print("Requesting content...")
+        // Note: to get the classlist: https://learn.colorado.edu/d2l/api/le/1.5/197814/classlist/
+        
         Alamofire.request("https://learn.colorado.edu/d2l/api/le/1.5/\(class_id)/content/root/").responseJSON { response in
             //debugPrint(response)
             switch response.result {
