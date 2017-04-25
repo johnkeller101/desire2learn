@@ -9,17 +9,32 @@
 import UIKit
 import WebKit
 
-class FileAttachmentViewController: UIViewController {
+class FileAttachmentViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     var url: String = ""
     var name: String = ""
     var webView: WKWebView?
     
+    override func loadView() {
+        super.loadView()
+        self.webView = WKWebView(frame: self.view.bounds)
+        self.webView?.navigationDelegate = self
+        self.webView?.uiDelegate = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = name
         
-        self.webView = WKWebView()
+        
+        let btn1 = UIButton(type: .system)
+        btn1.setImage(UIImage(named: "Share"), for: .normal)
+        btn1.tintColor = .blue
+        btn1.frame = CGRect(x: 0, y: 0, width: 18, height: 25)
+        btn1.addTarget(self, action: #selector(FileAttachmentViewController.shareButton), for: .touchUpInside)
+        let item1 = UIBarButtonItem(customView: btn1)
+
+        self.navigationItem.setRightBarButton(item1, animated: false)
         
         
         var cookiescript:[HTTPCookie] = [HTTPCookie()]
@@ -47,8 +62,7 @@ class FileAttachmentViewController: UIViewController {
                     //request.addValue(script, forHTTPHeaderField: "Cookie")
                 }
             }
-        }
-        self.webView = WKWebView(frame: self.view.bounds)
+        }  
         self.webView?.sizeToFit()
 
         var request = URLRequest(url: URL(string: url)!)
@@ -66,6 +80,26 @@ class FileAttachmentViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("FAILED")
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("FAILED prov")
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        print("LOADING")
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("FINISHED")
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 
@@ -98,5 +132,13 @@ class FileAttachmentViewController: UIViewController {
         }
         print(result)
         return result
+    }
+    
+    @IBAction func shareButton(_ sender: Any) {
+        
+        // Remove all the contents that (may) have loaded
+        
+        print("testing simplty testing")
+
     }
 }

@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
         OnePasswordExtension.shared().findLogin(forURLString: "https://colorado.edu", for: self, sender: sender, completion: { (loginDictionary, error) -> Void in
             if loginDictionary == nil {
                 if ((error?.localizedDescription) != nil) {
-                    print("Error: \(error?.localizedDescription)")
+                    print("Error: \(String(describing: error?.localizedDescription))")
                 }
                 return
             }

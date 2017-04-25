@@ -46,14 +46,12 @@ class ClassTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
         if(section == 0){
+            // Limit how many news items to display to 3
             if(self.news_items.count > 3){
                 return 3
             } else {
@@ -87,6 +85,8 @@ class ClassTableViewController: UITableViewController {
             formatter.dateFormat = "M/d"
             let st = formatter.string(from: date2!)
 
+            
+            cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .body)
             cell.textLabel?.text = name2
             if attachments.count != 0 {
                 cell.detailTextLabel?.text = "📎 "+st
@@ -154,10 +154,6 @@ class ClassTableViewController: UITableViewController {
         return view
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.row+1)!")
         if indexPath.section == 0 {
@@ -211,6 +207,33 @@ class ClassTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let headerHeight:CGFloat = 30
+        
+        switch section {
+        case 0:
+            if self.news_items.count > 0 {
+                return headerHeight
+            } else {
+                return 0
+            }
+        case 1:
+            if self.grades.count > 0 {
+                return headerHeight
+            } else {
+                return 0
+            }
+        case 2:
+            if self.class_content.count > 0 {
+                return headerHeight
+            } else {
+                return 0
+            }
+        default:
+            return 0
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -235,41 +258,6 @@ class ClassTableViewController: UITableViewController {
             return nil
         }
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     
     func retrieveNews(){
