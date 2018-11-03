@@ -1,18 +1,20 @@
 PODS:
-  - Alamofire (4.4.0)
-  - Locksmith (3.0.0)
-  - RAMAnimatedTabBarController (2.2.0)
+  - Alamofire (4.7.3)
+  - Locksmith (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Locksmith
-  - RAMAnimatedTabBarController
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Locksmith
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  Locksmith: 310b4cc5031af5728bf4db5d4de547a5100c6a3b
-  RAMAnimatedTabBarController: 4904a0ec08f2a4e935d0d3a5824551a77390b965
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Locksmith: e9bebbaaa4cee3c511bc358a44f843c3fe00e21f
 
-PODFILE CHECKSUM: a91147c4371b3182ffc1041c0302a2c140ec47ad
+PODFILE CHECKSUM: ec4a39e3abcb1681d71589ffe71b8a068e0684a4
 
-COCOAPODS: 1.2.0.beta.1
+COCOAPODS: 1.5.3

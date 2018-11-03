@@ -35,7 +35,7 @@
             </objects>
             <point key="canvasLocation" x="388" y="72"/>
         </scene>
-        <!--Desire2Learn-->
+        <!--Enrollments Table View Controller-->
         <scene sceneID="AHH-EF-xZn">
             <objects>
                 <tableViewController id="7vN-b4-YFB" customClass="EnrollmentsTableViewController" customModule="desire2learn" customModuleProvider="target" sceneMemberID="viewController">
@@ -78,12 +78,7 @@
                             <outlet property="delegate" destination="7vN-b4-YFB" id="hq7-Rw-T0T"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Desire2Learn" id="Ps9-XK-Y8e">
-                        <barButtonItem key="leftBarButtonItem" title="Login" id="0gc-yL-dlR">
-                            <connections>
-                                <action selector="logoutButton:" destination="7vN-b4-YFB" id="ay3-ZS-DPq"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" id="Ps9-XK-Y8e">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="QSJ-nH-GfK">
                             <connections>
                                 <action selector="refreshButton:" destination="7vN-b4-YFB" id="2xS-8L-j03"/>
@@ -91,7 +86,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="logoutButton" destination="0gc-yL-dlR" id="w0X-51-VPj"/>
                         <outlet property="refreshButton" destination="QSJ-nH-GfK" id="yM7-2Z-Gbh"/>
                     </connections>
                 </tableViewController>

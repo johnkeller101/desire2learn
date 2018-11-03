@@ -56,13 +56,10 @@ class LoginViewController: UIViewController {
             let usr = usernameField.text
             let pass = passwordField.text
             
-            var sucess:Bool = false
-            
             let help = D2LFunctions()
             help.login(username: usr!, password: pass!, completion: {
                 (res: NSDictionary?) in
-                if ((res?.allValues.count)! > 0) {
-                    sucess = true;
+                if ((res?.allValues.count)! > 0) {  
                     
                     print("Saving login information to Keychain");
                     

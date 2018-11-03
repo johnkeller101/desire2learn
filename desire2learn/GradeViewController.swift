@@ -35,7 +35,7 @@ class GradeViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
 
-        let refreshButton = UIBarButtonItem(title: "🔄", style: .plain, target: self, action: #selector(GradeViewController.switchView))
+        let refreshButton = UIBarButtonItem(title: "%", style: .plain, target: self, action: #selector(GradeViewController.switchView))
         navigationItem.rightBarButtonItem = refreshButton
         
         self.title = self.name
@@ -55,11 +55,24 @@ class GradeViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell")!
         cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        
+        cell.textLabel?.textColor = .white
+        
+        cell.textLabel!.lineBreakMode = .byTruncatingTail
+        cell.layoutSubviews()
+        
+        cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)
+        cell.detailTextLabel?.textColor = .white
+        cell.detailTextLabel?.backgroundColor = cell.backgroundColor
+        
+        
+        cell.textLabel?.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        
         if indexPath.section == 0 {
             let sub = grades[indexPath.row] as! NSArray
 //        let arr:NSArray = gradeobjects[sub[2] as! String] as! NSArray
             
-            print(sub[2] as! String)
+//            print(sub[2] as! String)
             let content_name = sub[0] as? String
             let g_max = sub[2] as? String
             cell.textLabel?.text = content_name

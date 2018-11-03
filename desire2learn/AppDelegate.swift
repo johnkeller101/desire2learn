@@ -16,6 +16,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UINavigationBar.appearance().barTintColor = UIColor(red:0.09, green:0.09, blue:0.09, alpha:1.0)
+        UINavigationBar.appearance().tintColor = UIColor(red:1.00, green:0.58, blue:0.00, alpha:1.0)
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
+        UITableView.appearance().backgroundColor = UIColor(red:0.09, green:0.09, blue:0.09, alpha:1.0)
+        UITableView.appearance().separatorColor = UIColor(red:0.20, green:0.20, blue:0.20, alpha:1.0)
+        
+        UITableViewCell.appearance().backgroundColor = UIColor(red:0.11, green:0.11, blue:0.11, alpha:1.0)
+        
+        UITableViewCell.appearance().textLabel?.textColor = UIColor.white
+        UITableViewCell.appearance().detailTextLabel?.textColor = UIColor.white
+        
+        UILabel.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).textColor = .white
+        UITextView.appearance(whenContainedInInstancesOf: [UITableViewCell.self]).textColor = .white
+        
+        
+        
+        UISegmentedControl.appearance().tintColor = UIColor(red:1.00, green:0.58, blue:0.00, alpha:1.0)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        
+        
         return true
     }
 

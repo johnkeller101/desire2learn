@@ -11,8 +11,6 @@ import Alamofire
 
 class EnrollmentsTableViewController: UITableViewController {
 
-    @IBOutlet weak var logoutButton: UIBarButtonItem!
-
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     
     var otherEnrollments = [String: Any]()
@@ -22,7 +20,6 @@ class EnrollmentsTableViewController: UITableViewController {
     var otherList:Array = [Any]()
     var firstName: String = ""
     var lastName: String = ""
-    var identifier: String = ""
     
     var userName = ""
     var password = ""
@@ -33,6 +30,25 @@ class EnrollmentsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let btn1 = UIButton(type: .system)
+        btn1.setImage(UIImage(named: "Profile"), for: .normal)
+        btn1.imageView?.contentMode = .scaleAspectFit
+        btn1.tintColor = .blue
+        btn1.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        btn1.addTarget(self, action: #selector(EnrollmentsTableViewController.profileButton(_:)), for: .touchUpInside)
+        let item1 = UIBarButtonItem(customView: btn1)
+        self.navigationItem.setLeftBarButton(item1, animated: false)
+        
+        
+//        let logoImage = UIImage(named: "culogo")
+        let imageView = UIImageView(image: UIImage(named: "culogo_white.png"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame = CGRect(x: 0, y: 0, width: (self.navigationController?.navigationBar.frame.width)!/2, height: (self.navigationController?.navigationBar.frame.height)! - 20)
+        self.navigationItem.titleView = imageView
+        
+        
 
 //        self.tableView.separatorStyle = .none
 //        self.tableView.backgroundColor = UIColor(white:0.09, alpha:1.0)
@@ -47,8 +63,8 @@ class EnrollmentsTableViewController: UITableViewController {
                 
                 self.login()
                 self.loggedIn = true
-                logoutButton.title = "Logout"
                 self.loadClasses()
+                self.tableView.reloadData()
                 
             } else {
                 print("Error retrieving username and password, displaying login screen")
@@ -135,7 +151,7 @@ class EnrollmentsTableViewController: UITableViewController {
                 return nil
             }
         } else {
-            return "Moodle (incomplete)"
+            return ""
         }
     }
     
@@ -145,19 +161,22 @@ class EnrollmentsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if (section == 1) {
-            let footer_view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 20))
+            let footer_view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 15))
             footer_view.backgroundColor = UIColor.clear
             
-            let label = UILabel(frame: footer_view.frame)
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 15))
             label.backgroundColor = UIColor.clear
             if(firstName.characters.count > 0){
-                label.text = "Logged in as " + firstName + " " + lastName
+                label.text = "Logged in as " + firstName + " " + lastName + " (" + userName + ")"
+            } else {
+                label.text = "Logging in as "+userName+"..."
             }
             label.textColor = UIColor.lightGray
             label.textAlignment = .center
             label.font = label.font.withSize(12)
             
             footer_view.addSubview(label)
+            
             return footer_view
         }
         return nil
@@ -337,5 +356,21 @@ class EnrollmentsTableViewController: UITableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
         self.present(controller, animated: true, completion: nil)
+    }
+    
+    @IBAction func profileButton(_ sender: Any) {
+        
+        let sourceSelectorTableViewController = ProfileViewController()
+        let navigationController = UINavigationController(rootViewController: sourceSelectorTableViewController)
+        
+        self.present(navigationController, animated: true, completion: nil)
+        
+//        let next_vc = ProfileViewController()
+//        self.present(next_vc, animated: true, completion: nil)
+        
+        // Remove all the contents that (may) have loaded
+        
+        print("testing simplty testing")
+        
     }
 }

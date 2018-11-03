@@ -91,7 +91,7 @@ class NewDetailViewController: UIViewController, UITableViewDelegate, UITableVie
             var newFrame = CGRect(x: inset, y: inset, width: newSize.width - (inset*2), height: newSize.height - (inset*2))
             newFrame.size = CGSize(width: max(newSize.width, fixedWidth)-(inset*2), height: newSize.height)
             contentView.frame = newFrame;
-            
+            contentView.backgroundColor = cell.backgroundColor
             cell.addSubview(contentView)
             //let parser = parser
             

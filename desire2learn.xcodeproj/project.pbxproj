@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		461BC7571EB00DFE008CBEB9 /* culogo_notext.png in Resources */ = {isa = PBXBuildFile; fileRef = 461BC7561EB00DFE008CBEB9 /* culogo_notext.png */; };
 		4640D5F71DFA1C6800B7B745 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4640D5F41DFA1C6800B7B745 /* UIViewExtension.swift */; };
 		465D7C861DA6D97000DD874C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7C851DA6D97000DD874C /* AppDelegate.swift */; };
 		465D7C881DA6D97000DD874C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7C871DA6D97000DD874C /* ViewController.swift */; };
@@ -15,7 +16,6 @@
 		465D7C901DA6D97000DD874C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465D7C8E1DA6D97000DD874C /* LaunchScreen.storyboard */; };
 		465D7CB01DA6ED2600DD874C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465D7CA31DA6EC9500DD874C /* Alamofire.framework */; };
 		465D7CB11DA6ED2600DD874C /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 465D7CA31DA6EC9500DD874C /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		465D7CB61DA6F7D300DD874C /* culogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 465D7CB51DA6F7D300DD874C /* culogo.jpg */; };
 		465D7CB81DA702D700DD874C /* EnrollmentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CB71DA702D700DD874C /* EnrollmentsTableViewController.swift */; };
 		465D7CBA1DA7169800DD874C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CB91DA7169800DD874C /* SwiftyJSON.swift */; };
 		465D7CBC1DA739E000DD874C /* ClassTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CBB1DA739E000DD874C /* ClassTableViewController.swift */; };
@@ -23,6 +23,8 @@
 		465D7CC41DA8A8AA00DD874C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 465D7CC31DA8A8AA00DD874C /* SafariServices.framework */; };
 		465D7CC61DA8AF9D00DD874C /* FileBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */; };
 		466238971DA8C0DE004D552B /* GradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466238961DA8C0DE004D552B /* GradeViewController.swift */; };
+		466CA2CB1EB26179009070A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CA2CA1EB26179009070A9 /* ProfileViewController.swift */; };
+		466CA2D41EB26406009070A9 /* culogo_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 466CA2D31EB26406009070A9 /* culogo_white.png */; };
 		466D228A1DA956B80034759C /* FileAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22891DA956B80034759C /* FileAttachmentViewController.swift */; };
 		466D22931DA957A80034759C /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 466D22921DA957A80034759C /* WebKit.framework */; };
 		466D22FE1DAAC45A0034759C /* MarkupElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466D22F91DAAC45A0034759C /* MarkupElement.swift */; };
@@ -117,6 +119,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		461BC7561EB00DFE008CBEB9 /* culogo_notext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = culogo_notext.png; sourceTree = "<group>"; };
 		4640D5F01DFA1C2B00B7B745 /* Wallet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Wallet.framework; path = "../../../../Library/Developer/Xcode/DerivedData/desire2learn-geacegoikeenuqdaonujopdmerxa/Build/Products/Debug-iphoneos/Wallet/Wallet.framework"; sourceTree = "<group>"; };
 		4640D5F41DFA1C6800B7B745 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		465D7C821DA6D97000DD874C /* desire2learn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = desire2learn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,7 +130,6 @@
 		465D7C8F1DA6D97000DD874C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		465D7C911DA6D97000DD874C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		465D7C971DA6EC9500DD874C /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
-		465D7CB51DA6F7D300DD874C /* culogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = culogo.jpg; sourceTree = "<group>"; };
 		465D7CB71DA702D700DD874C /* EnrollmentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrollmentsTableViewController.swift; sourceTree = "<group>"; };
 		465D7CB91DA7169800DD874C /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		465D7CBB1DA739E000DD874C /* ClassTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassTableViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,8 @@
 		465D7CC31DA8A8AA00DD874C /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileBrowserViewController.swift; sourceTree = "<group>"; };
 		466238961DA8C0DE004D552B /* GradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradeViewController.swift; sourceTree = "<group>"; };
+		466CA2CA1EB26179009070A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		466CA2D31EB26406009070A9 /* culogo_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = culogo_white.png; sourceTree = "<group>"; };
 		466D22891DA956B80034759C /* FileAttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAttachmentViewController.swift; sourceTree = "<group>"; };
 		466D22921DA957A80034759C /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		466D22941DAAC2250034759C /* desire2learn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "desire2learn-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				465D7CBD1DA74F0600DD874C /* NewDetailViewController.swift */,
 				465D7CC51DA8AF9D00DD874C /* FileBrowserViewController.swift */,
 				466238961DA8C0DE004D552B /* GradeViewController.swift */,
+				466CA2CA1EB26179009070A9 /* ProfileViewController.swift */,
 				466D22891DA956B80034759C /* FileAttachmentViewController.swift */,
 				4682FD461DC91AC900D02AAB /* LoginViewController.swift */,
 				465D7C891DA6D97000DD874C /* Main.storyboard */,
@@ -256,7 +261,8 @@
 				465D7C911DA6D97000DD874C /* Info.plist */,
 				465D7C971DA6EC9500DD874C /* Alamofire.xcodeproj */,
 				46BF45E31DCBE69200E211A2 /* desire2learn.entitlements */,
-				465D7CB51DA6F7D300DD874C /* culogo.jpg */,
+				461BC7561EB00DFE008CBEB9 /* culogo_notext.png */,
+				466CA2D31EB26406009070A9 /* culogo_white.png */,
 				46F7CA4B1DBF245E00C8460B /* culogo.png */,
 				46F7CA421DBF225800C8460B /* boulder.jpg */,
 				46BF45E41DCBF10900E211A2 /* boulder_2.jpg */,
@@ -297,7 +303,6 @@
 				465D7C801DA6D97000DD874C /* Resources */,
 				465D7CB41DA6ED2600DD874C /* Embed Frameworks */,
 				FA81119A4D60C7A930A8AB44 /* [CP] Embed Pods Frameworks */,
-				BB1E6C95C46E75579C7EE4C2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -316,7 +321,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "John Keller";
 				TargetAttributes = {
 					465D7C811DA6D97000DD874C = {
@@ -415,12 +420,13 @@
 			files = (
 				465D7C901DA6D97000DD874C /* LaunchScreen.storyboard in Resources */,
 				465D7C8D1DA6D97000DD874C /* Assets.xcassets in Resources */,
+				466CA2D41EB26406009070A9 /* culogo_white.png in Resources */,
 				46BF45E51DCBF10900E211A2 /* boulder_2.jpg in Resources */,
 				46E784501DEE339B008B508A /* db.sqlite3 in Resources */,
 				46F7CA4C1DBF245E00C8460B /* culogo.png in Resources */,
+				461BC7571EB00DFE008CBEB9 /* culogo_notext.png in Resources */,
 				46BF45E21DCBE31900E211A2 /* 1Password.xcassets in Resources */,
 				46F7CA431DBF225800C8460B /* boulder.jpg in Resources */,
-				465D7CB61DA6F7D300DD874C /* culogo.jpg in Resources */,
 				465D7C8B1DA6D97000DD874C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,34 +434,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BB1E6C95C46E75579C7EE4C2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-desire2learn/Pods-desire2learn-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F065D60DA297F891BDC141F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-desire2learn-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA81119A4D60C7A930A8AB44 /* [CP] Embed Pods Frameworks */ = {
@@ -464,9 +458,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-desire2learn/Pods-desire2learn-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Locksmith/Locksmith.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Locksmith.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -498,6 +497,7 @@
 				466D23001DAAC45A0034759C /* Parse.swift in Sources */,
 				4682FD471DC91AC900D02AAB /* LoginViewController.swift in Sources */,
 				465D7CBE1DA74F0600DD874C /* NewDetailViewController.swift in Sources */,
+				466CA2CB1EB26179009070A9 /* ProfileViewController.swift in Sources */,
 				465D7CBA1DA7169800DD874C /* SwiftyJSON.swift in Sources */,
 				46A4460B1DC41604009BCAD2 /* D2LFunctions.swift in Sources */,
 			);
@@ -542,15 +542,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -593,15 +601,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -638,7 +654,7 @@
 				CODE_SIGN_ENTITLEMENTS = desire2learn/desire2learn.entitlements;
 				DEVELOPMENT_TEAM = LU2S86842K;
 				INFOPLIST_FILE = desire2learn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnkeller.desire2learn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -658,7 +674,7 @@
 				CODE_SIGN_ENTITLEMENTS = desire2learn/desire2learn.entitlements;
 				DEVELOPMENT_TEAM = LU2S86842K;
 				INFOPLIST_FILE = desire2learn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.johnkeller.desire2learn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
